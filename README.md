@@ -1,7 +1,7 @@
 # android-lockpattern
 
 * License: [Apache License v2.0]
-* Version: `7.0.0`
+* Version: `7.0.0` (October 28th, 2015)
 * Project page: <http://haibison.github.io/android-lockpattern/>
 * Demo: <https://play.google.com/store/apps/details?id=group.pals.android.lib.ui.lockpattern.demo>
 * For developers: [Wiki], [API documentation].
@@ -41,6 +41,8 @@ We sincerely thank all of our friends -- who have been contributing to this proj
 
 
 # History
+
+* For newer versions, please check git tags with their messages.
 
 * Version 7.0.0
     + *Release: October 28th, 2015*
