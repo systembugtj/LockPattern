@@ -6,7 +6,7 @@
 * Demo: <https://play.google.com/store/apps/details?id=group.pals.android.lib.ui.lockpattern.demo>
 * For developers: [Wiki], [API documentation].
 
---
+---
 
 ## Features
 
@@ -22,10 +22,10 @@
     + Dark/Light `DialogWhenLarge` (available from API 7+, but only works from API 11+)
 * Ability to generate and let the user verify CAPTCHA pattern.
 
---
 
 In short, you can use this library in your closed source/commercial apps with or without our knowledge. Hope you enjoy it  :-)
 
+---
 
 # Credits
 
@@ -39,6 +39,7 @@ We sincerely thank all of our friends -- who have been contributing to this proj
 * [Nikita Osipov](https://github.com/nikkoss)
 * And others.
 
+---
 
 # History
 
