@@ -1,4 +1,4 @@
-# Version: `7.0.0` _(October 28th, 2015)_
+# `7.0.0` _(October 28th, 2015)_
 
 Changes:
 
