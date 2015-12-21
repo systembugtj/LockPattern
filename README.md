@@ -43,7 +43,7 @@ We sincerely thank all of our friends -- who have been contributing to this proj
 
 # History
 
-* For newer versions, please check git tags with their messages.
+* For newer versions, please check file [`version-info.md`](version-info.md).
 
 * Version 7.0.0
     + *Release: October 28th, 2015*
