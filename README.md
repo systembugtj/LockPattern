@@ -10,17 +10,17 @@
 
 ## Features
 
-* Requires: Android 2.1+ (API 7+).
-* Supported IDE: Android Studio.
-* *No dependencies.*
-* Designed for both *phones and tablets*.
-* Stealth mode (invisible pattern).
+* Requires: Android 2.1+ (API 7+)
+* Supported IDE: Android Studio
+* _No run-time dependencies_
+* Designed for both _phones and tablets_
+* Stealth mode (invisible pattern)
 * Many built-in themes:
     + Dark/Light
     + Light with dark action bar (available from API 7+, but only works from API 14+)
     + Dark/Light dialogs
     + Dark/Light `DialogWhenLarge` (available from API 7+, but only works from API 11+)
-* Ability to generate and let the user verify CAPTCHA pattern.
+* Ability to generate and let the user verify CAPTCHA pattern
 
 
 In short, you can use this library in your closed source/commercial apps with or without our knowledge. Hope you enjoy it  :-)
