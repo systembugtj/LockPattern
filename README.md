@@ -1,7 +1,7 @@
 # android-lockpattern
 
 * Version: [`7.0.0`](version-info.md) _(October 28th, 2015)_
-* License: [Apache License v2.0]
+* License: [Apache License v2.0](LICENSE)
 * Project page: <https://bitbucket.org/haibison/android-lockpattern>
 * Demo: <https://play.google.com/store/apps/details?id=group.pals.android.lib.ui.lockpattern.demo>
 * For developers: [Wiki], [API documentation].
@@ -44,6 +44,8 @@ We sincerely thank all of our friends -- who have been contributing to this proj
 # History
 
 * For newer versions, please check file [`version-info.md`](version-info.md).
+
+* ...
 
 * Version 7.0.0
     + *Release: October 28th, 2015*
@@ -296,6 +298,5 @@ We sincerely thank all of our friends -- who have been contributing to this proj
     + create pattern;
     + compare to existing pattern;
 
-[Apache License v2.0]: https://www.apache.org/licenses/LICENSE-2.0.html
 [Wiki]: https://bitbucket.org/haibison/android-lockpattern/wiki/
 [API documentation]: http://haibison.bitbucket.org/apidocs/android-lockpattern
