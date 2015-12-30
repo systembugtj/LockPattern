@@ -1,10 +1,13 @@
 # `7.0.0` _(October 28th, 2015)_
 
-Dependencies:
+## Dependencies
 
-- `com.android.support:support-annotations:+`
+- [`com.android.support:support-annotations:+`][#support-annotations]
 
-Changes:
+## Changes
 
 - Made dependency `support-annotations` always latest version.
 - Removed `haibison.android.lockpattern.utils.`~~`LoadingDialog`~~.
+
+
+[#support-annotations]: https://developer.android.com/tools/support-library/index.html
