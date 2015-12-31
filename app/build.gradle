@@ -20,6 +20,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion '23.0.2'
 
+    resourcePrefix 'alp_42447968_'
+
     defaultConfig {
         minSdkVersion 7
         targetSdkVersion 23

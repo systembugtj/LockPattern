@@ -23,11 +23,11 @@
 * Ability to generate and let the user verify CAPTCHA pattern
 
 
-In short, you can use this library in your closed source/commercial apps with or without our knowledge. Hope you enjoy it  :-)
+In short, you can use this library in your closed source/commercial apps with or without our knowledge. Hope you enjoy it  `:-)`
 
 ---
 
-# Credits
+## Credits
 
 We sincerely thank all of our friends -- who have been contributing to this project.  We hope this project will be always useful for everyone.
 
@@ -37,13 +37,13 @@ We sincerely thank all of our friends -- who have been contributing to this proj
 * Yan Cheng Cheok (Project Admin of [JStock](http://jstock.sourceforge.net/))
 * [Damonzh](https://github.com/Damonzh)
 * [Nikita Osipov](https://github.com/nikkoss)
-* And others.
+* And others
 
 ---
 
-# History
+## History
 
-* For newer versions, please check file [`version-info.md`](version-info.md).
+_For newer versions, please check file [`version-info.md`](version-info.md)._
 
 * ...
 
