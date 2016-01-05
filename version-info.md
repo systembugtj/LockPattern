@@ -8,7 +8,7 @@
 
 ## Changes
 
-- Made dependency `support-annotations` always latest version.
+- Made dependency [`com.android.support:support-annotations`][#com.android.support:*] always latest version.
 - Removed `haibison.android.lockpattern.utils.`~~`LoadingDialog`~~.
 
 
