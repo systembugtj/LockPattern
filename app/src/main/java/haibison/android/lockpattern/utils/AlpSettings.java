@@ -334,6 +334,7 @@ public class AlpSettings {
          * @param context the context.
          * @return the pattern. Default is {@code null}.
          */
+        @Nullable
         public static char[] getPattern(@NonNull Context context) {
             final String pattern = p(context).getString(context.getString(R.string.alp_42447968_pkey_sys_pattern), null);
             return pattern == null ? null : pattern.toCharArray();
@@ -357,6 +358,7 @@ public class AlpSettings {
          * @param context the context.
          * @return the full name of encrypter class. Default is {@code null}.
          */
+        @Nullable
         public static char[] getEncrypterClass(@NonNull Context context) {
             final String clazz = p(context).getString(context.getString(R.string.alp_42447968_pkey_sys_encrypter_class), null);
             return clazz == null ? null : clazz.toCharArray();
@@ -370,7 +372,7 @@ public class AlpSettings {
          * @param context the context.
          * @param clazz   the encrypter class, can be {@code null} if you don't want to use it.
          */
-        public static void setEncrypterClass(@NonNull Context context, @Nullable Class<?> clazz) {
+        public static void setEncrypterClass(@NonNull Context context, @Nullable Class<? extends Encrypter> clazz) {
             setEncrypterClass(context, clazz != null ? clazz.getName().toCharArray() : null);
         }// setEncrypterClass()
 
