@@ -16,8 +16,8 @@
 
 package haibison.android.lockpattern.utils;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import haibison.android.underdogs.NonNull;
+import haibison.android.underdogs.Nullable;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

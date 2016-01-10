@@ -17,11 +17,11 @@
 package haibison.android.lockpattern.utils;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import java.util.List;
 
 import haibison.android.lockpattern.widget.LockPatternView.Cell;
+import haibison.android.underdogs.NonNull;
 
 /**
  * Interface for encrypter.

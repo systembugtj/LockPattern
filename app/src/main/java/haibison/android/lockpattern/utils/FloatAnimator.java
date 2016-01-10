@@ -17,12 +17,12 @@
 package haibison.android.lockpattern.utils;
 
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.List;
 
 import haibison.android.lockpattern.collect.Lists;
+import haibison.android.underdogs.NonNull;
+import haibison.android.underdogs.Nullable;
 
 /**
  * Float animator.

@@ -19,10 +19,11 @@ package haibison.android.lockpattern.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
+
+import haibison.android.underdogs.NonNull;
 
 import static haibison.android.lockpattern.BuildConfig.DEBUG;
 

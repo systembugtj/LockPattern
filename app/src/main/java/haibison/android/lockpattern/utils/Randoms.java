@@ -16,12 +16,12 @@
 
 package haibison.android.lockpattern.utils;
 
-import android.support.annotation.NonNull;
 
 import java.util.List;
 import java.util.Random;
 
 import haibison.android.lockpattern.collect.Lists;
+import haibison.android.underdogs.NonNull;
 
 /**
  * Random utilities.

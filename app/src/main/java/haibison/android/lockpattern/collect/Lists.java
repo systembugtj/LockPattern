@@ -16,7 +16,7 @@
 
 package haibison.android.lockpattern.collect;
 
-import android.support.annotation.NonNull;
+import haibison.android.underdogs.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;

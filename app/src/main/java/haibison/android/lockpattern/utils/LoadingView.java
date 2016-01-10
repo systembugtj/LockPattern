@@ -19,10 +19,11 @@ package haibison.android.lockpattern.utils;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.annotation.CallSuper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import haibison.android.underdogs.CallSuper;
+import haibison.android.underdogs.NonNull;
+import haibison.android.underdogs.Nullable;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 

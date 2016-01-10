@@ -23,10 +23,10 @@ import android.os.Build;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import haibison.android.lockpattern.R;
+import haibison.android.underdogs.NonNull;
+import haibison.android.underdogs.Nullable;
 
 /**
  * All settings for the library. They are stored in {@link SharedPreferences}.
