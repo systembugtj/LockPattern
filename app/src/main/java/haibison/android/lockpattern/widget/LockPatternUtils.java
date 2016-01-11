@@ -133,7 +133,6 @@ public class LockPatternUtils {
      * <p/>
      * <strong>Notes:</strong> This method is <b>not</b> optimized and <b>not</b> benchmarked yet for large size of the pattern's matrix.
      * Currently it works fine with a matrix of {@code 3x3} cells. Be careful when the size increases.
-     * <p/>
      *
      * @param size the size of the pattern to be generated.
      * @return the generated pattern.
@@ -152,36 +151,24 @@ public class LockPatternUtils {
         usedIds.add(lastId);
 
         while (usedIds.size() < size) {
-            /**
-             * We start from an empty matrix, so there's always a break point to
-             * exit this loop.
-             */
+            // We start from an empty matrix, so there's always a break point to exit this loop.
 
             if (DEBUG) Log.d(CLASSNAME, " >> lastId = " + lastId);
 
             final int lastRow = lastId / LockPatternView.MATRIX_WIDTH;
             final int lastCol = lastId % LockPatternView.MATRIX_WIDTH;
 
-            /*
-             * This is the max available rows/ columns that we can reach from
-             * the cell of `lastId` to the border of the matrix.
-             */
+            // This is the max available rows/columns that we can reach from the cell of `lastId` to the border of the matrix.
             final int maxDistance = Math.max(
                     Math.max(lastRow, LockPatternView.MATRIX_WIDTH - lastRow),
-                    Math.max(lastCol, LockPatternView.MATRIX_WIDTH - lastCol));
+                    Math.max(lastCol, LockPatternView.MATRIX_WIDTH - lastCol)
+            );
 
             lastId = -1;
 
-            /**
-             * Starting from `distance` = 1, find the closest-available
-             * neighbour value of the cell [lastRow, lastCol].
-             */
+            // Starting from `distance` = 1, find the closest-available neighbour value of the cell [lastRow, lastCol].
             for (int distance = 1; distance <= maxDistance; distance++) {
-                /**
-                 * Now we have a square surrounding the current cell. We call it
-                 * ABCD, in which A is top-left, and C is bottom-right.
-                 */
-
+                // Now we have a square surrounding the current cell. We call it ABCD, in which A is top-left, and C is bottom-right.
                 final int rowA = lastRow - distance;
                 final int colA = lastCol - distance;
                 final int rowC = lastRow + distance;
@@ -189,23 +176,17 @@ public class LockPatternUtils {
 
                 int[] randomValues;
 
-                /**
-                 * Process randomly AB, BC, CD, and DA. Break the loop as soon
-                 * as we find one value.
-                 */
+                // Process randomly AB, BC, CD, and DA. Break the loop as soon as we find one value.
                 final int[] lines = Randoms.randIntArray(4);
-                for (int line : lines) {
+                for (final int line : lines) {
                     switch (line) {
                     case 0: {
                         if (rowA >= 0) {
-                            randomValues = Randoms.randIntArray(Math.max(0, colA),
-                                    Math.min(LockPatternView.MATRIX_WIDTH, colC + 1));
-                            for (int c : randomValues) {
+                            randomValues = Randoms.randIntArray(Math.max(0, colA), Math.min(LockPatternView.MATRIX_WIDTH, colC + 1));
+                            for (final int c : randomValues) {
                                 lastId = rowA * LockPatternView.MATRIX_WIDTH + c;
-                                if (usedIds.contains(lastId))
-                                    lastId = -1;
-                                else
-                                    break;
+                                if (usedIds.contains(lastId)) lastId = -1;
+                                else break;
                             }
                         }
 
@@ -214,14 +195,11 @@ public class LockPatternUtils {
 
                     case 1: {
                         if (colC < LockPatternView.MATRIX_WIDTH) {
-                            randomValues = Randoms.randIntArray(Math.max(0, rowA + 1),
-                                    Math.min(LockPatternView.MATRIX_WIDTH, rowC + 1));
-                            for (int r : randomValues) {
+                            randomValues = Randoms.randIntArray(Math.max(0, rowA + 1), Math.min(LockPatternView.MATRIX_WIDTH, rowC + 1));
+                            for (final int r : randomValues) {
                                 lastId = r * LockPatternView.MATRIX_WIDTH + colC;
-                                if (usedIds.contains(lastId))
-                                    lastId = -1;
-                                else
-                                    break;
+                                if (usedIds.contains(lastId)) lastId = -1;
+                                else break;
                             }
                         }
 
@@ -230,14 +208,11 @@ public class LockPatternUtils {
 
                     case 2: {
                         if (rowC < LockPatternView.MATRIX_WIDTH) {
-                            randomValues = Randoms.randIntArray(Math.max(0, colA),
-                                    Math.min(LockPatternView.MATRIX_WIDTH, colC));
-                            for (int c : randomValues) {
+                            randomValues = Randoms.randIntArray(Math.max(0, colA), Math.min(LockPatternView.MATRIX_WIDTH, colC));
+                            for (final int c : randomValues) {
                                 lastId = rowC * LockPatternView.MATRIX_WIDTH + c;
-                                if (usedIds.contains(lastId))
-                                    lastId = -1;
-                                else
-                                    break;
+                                if (usedIds.contains(lastId)) lastId = -1;
+                                else break;
                             }
                         }
 
@@ -246,14 +221,11 @@ public class LockPatternUtils {
 
                     case 3: {
                         if (colA >= 0) {
-                            randomValues = Randoms.randIntArray(Math.max(0, rowA + 1),
-                                    Math.min(LockPatternView.MATRIX_WIDTH, rowC));
-                            for (int r : randomValues) {
+                            randomValues = Randoms.randIntArray(Math.max(0, rowA + 1), Math.min(LockPatternView.MATRIX_WIDTH, rowC));
+                            for (final int r : randomValues) {
                                 lastId = r * LockPatternView.MATRIX_WIDTH + colA;
-                                if (usedIds.contains(lastId))
-                                    lastId = -1;
-                                else
-                                    break;
+                                if (usedIds.contains(lastId)) lastId = -1;
+                                else break;
                             }
                         }
 
@@ -271,7 +243,7 @@ public class LockPatternUtils {
         }// while
 
         final ArrayList<LockPatternView.Cell> result = Lists.newArrayList();
-        for (int id : usedIds) result.add(LockPatternView.Cell.of(id));
+        for (final int id : usedIds) result.add(LockPatternView.Cell.of(id));
 
         return result;
     }// genCaptchaPattern()
