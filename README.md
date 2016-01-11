@@ -10,17 +10,20 @@
 
 ## Features
 
-* Requires: Android 2.1+ (API 7+)
-* Supported IDE: Android Studio
-* _No run-time dependencies_
-* Designed for both _phones and tablets_
-* Stealth mode (invisible pattern)
-* Many built-in themes:
+- Requires: Android 2.1+ (API 7+)
+- Supported IDE: Android Studio
+- _No run-time dependencies_
+- _Designed with developers in mind._ You can pick up a stranger and weird library like this one, then use it right away without worrying about
+  it invading your own [preferences][SharedPreferences], or breaking your app resource names (or other libraries' resource names). Short answer:
+  it uses a UUID for its preference file name, and a CRC-32 string to prefix its resource names (see [FAQs]).
+- Designed for both _phones and tablets_
+- Stealth mode (invisible pattern)
+- Many built-in themes:
     + Dark/Light
     + Light with dark action bar (available from API 7+, but only works from API 14+)
     + Dark/Light dialogs
     + Dark/Light `DialogWhenLarge` (available from API 7+, but only works from API 11+)
-* Ability to generate and let the user verify CAPTCHA pattern
+- Ability to generate and let the user verify CAPTCHA pattern
 
 
 In short, you can use this library in your closed source/commercial apps with or without our knowledge. Hope you enjoy it  `:-)`
@@ -299,4 +302,6 @@ _For newer versions, please check file [`version-info.md`](version-info.md)._
     + compare to existing pattern;
 
 [Wiki]: https://bitbucket.org/haibison/android-lockpattern/wiki/
+[FAQs]: https://bitbucket.org/haibison/android-lockpattern/wiki/FAQs
 [API documentation]: http://haibison.bitbucket.org/apidocs/android-lockpattern
+[SharedPreferences]: https://developer.android.com/reference/android/content/SharedPreferences.html
