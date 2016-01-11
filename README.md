@@ -14,8 +14,8 @@
 - Supported IDE: Android Studio
 - _No run-time dependencies_
 - _Designed with developers in mind._ You can pick up a stranger and weird library like this one, then use it right away without worrying about
-  it invading your own [preferences][SharedPreferences], or breaking your app resource names (or other libraries' resource names). Short answer:
-  it uses a UUID for its preference file name, and a CRC-32 string to prefix its resource names (see [FAQs]).
+  it invading your own [preferences][SharedPreferences], or breaking your app's resource names (or other libraries' resource names). Short
+  answer: it uses a UUID for its preference file name, and a CRC-32 string to prefix its resource names (see [FAQs]).
 - Designed for both _phones and tablets_
 - Stealth mode (invisible pattern)
 - Many built-in themes:
