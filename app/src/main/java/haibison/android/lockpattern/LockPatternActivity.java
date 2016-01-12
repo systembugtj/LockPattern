@@ -79,8 +79,8 @@ import static haibison.android.lockpattern.utils.AlpSettings.Security.METADATA_E
  * <h1>NOTES</h1>
  * <p>
  * <ul>
- * <li> You must use one of built-in actions when calling this activity. They start with {@code ACTION_*}. Otherwise the library might behave
- * strangely (we don't cover those cases).</li>
+ * <li> You must use one of built-in actions when calling this activity. They start with {@code ACTION_*}. Otherwise un
+ * {@link UnsupportedOperationException} will be thrown.</li>
  * <li>You must use one of the themes that this library supports. They start with {@code R.style.Alp_42447968_Theme_*}. The reason is the themes
  * contain resources that the library needs.</li>
  * <li>With {@link #ACTION_COMPARE_PATTERN}, there are <strong><em>4 possible result codes</em></strong>: {@link #RESULT_OK}, {@link
