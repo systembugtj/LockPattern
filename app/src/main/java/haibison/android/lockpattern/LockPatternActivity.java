@@ -484,6 +484,8 @@ public class LockPatternActivity extends Activity {
      */
     private static final long DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW = SECOND_IN_MILLIS;
 
+    private static final String[] SUPPORTED_ACTIONS = {ACTION_CREATE_PATTERN, ACTION_COMPARE_PATTERN, ACTION_VERIFY_CAPTCHA};
+
     /////////
     // FIELDS
     /////////
@@ -507,21 +509,21 @@ public class LockPatternActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (DEBUG) Log.d(CLASSNAME, "onCreate()");
+        // Check actions
+        for (final String action : SUPPORTED_ACTIONS)
+            if (!TextUtils.equals(action, getIntent().getAction()))
+                throw new UnsupportedOperationException("Unsupported action: " + getIntent().getAction());
 
-        /**
-         * EXTRA_THEME
-         */
+        // Theme
         if (getIntent().hasExtra(EXTRA_THEME))
             setTheme(getIntent().getIntExtra(EXTRA_THEME, R.style.Alp_42447968_Theme_Dark));
 
-        /**
-         * Apply theme resources
-         */
+        // Apply theme resources
         final int resThemeResources = ResourceUtils.resolveAttribute(this, R.attr.alp_42447968_theme_resources);
         if (resThemeResources == 0)
             throw new RuntimeException("Please provide theme resource via attribute `alp_42447968_theme_resources`."
-                    + " For example: <item name=\"alp_42447968_theme_resources\">@style/Alp_42447968.ThemeResources.Light</item>");
+                    + " For example: <item name=\"alp_42447968_theme_resources\">@style/Alp_42447968.ThemeResources.Light</item>"
+            );
         getTheme().applyStyle(resThemeResources, true);
 
         super.onCreate(savedInstanceState);
@@ -545,9 +547,7 @@ public class LockPatternActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        /**
-         * Use this hook instead of onBackPressed(), because onBackPressed() is not available in API 4.
-         */
+        // Use this hook instead of onBackPressed(), because onBackPressed() is not available in API 4.
         if (keyCode == KeyEvent.KEYCODE_BACK && ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
             if (mLoadingView != null) mLoadingView.cancel(true);
 
@@ -561,12 +561,10 @@ public class LockPatternActivity extends Activity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        /**
-         * Support canceling dialog on touching outside in APIs < 11.
-         *
-         * This piece of code is copied from android.view.Window. You can find it by searching for methods shouldCloseOnTouch() and
-         * isOutOfBounds().
-         */
+        // Support canceling dialog on touching outside in APIs < 11.
+        //
+        // This piece of code is copied from android.view.Window. You can find it by searching for methods shouldCloseOnTouch() and
+        // isOutOfBounds().
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB && event.getAction() == MotionEvent.ACTION_DOWN
                 && getWindow().peekDecorView() != null) {
             final int x = (int) event.getX();
@@ -627,10 +625,8 @@ public class LockPatternActivity extends Activity {
         else
             mStealthMode = AlpSettings.Display.isStealthMode(this);
 
-        /**
-         * Encrypter.
-         */
-        char[] encrypterClass;
+        // Encrypter
+        final char[] encrypterClass;
         if (metaData != null && metaData.containsKey(METADATA_ENCRYPTER_CLASS))
             encrypterClass = metaData.getString(METADATA_ENCRYPTER_CLASS).toCharArray();
         else
@@ -640,6 +636,7 @@ public class LockPatternActivity extends Activity {
             try {
                 mEncrypter = (Encrypter) Class.forName(new String(encrypterClass), false, getClassLoader()).newInstance();
             } catch (Throwable t) {
+                t.printStackTrace();
                 throw new InvalidEncrypterException();
             }
         }
@@ -649,9 +646,7 @@ public class LockPatternActivity extends Activity {
      * Initializes UI...
      */
     private void initContentView() {
-        /**
-         * Save all controls' state to restore later.
-         */
+        // Save all controls' state to restore later
         CharSequence infoText = mTextInfo != null ? mTextInfo.getText() : null;
         Boolean btnOkEnabled = mBtnConfirm != null ? mBtnConfirm.isEnabled() : null;
         LockPatternView.DisplayMode lastDisplayMode = mLockPatternView != null ? mLockPatternView.getDisplayMode() : null;
@@ -660,9 +655,7 @@ public class LockPatternActivity extends Activity {
         setContentView(R.layout.alp_42447968_lock_pattern_activity);
         UI.adjustDialogSizeForLargeScreens(getWindow());
 
-        /**
-         * MAP CONTROLS
-         */
+        // MAP CONTROLS
 
         mTextInfo = (TextView) findViewById(R.id.alp_42447968_textview_info);
         mLockPatternView = (LockPatternView) findViewById(R.id.alp_42447968_view_lock_pattern);
@@ -673,15 +666,11 @@ public class LockPatternActivity extends Activity {
 
         mViewGroupProgressBar = findViewById(R.id.alp_42447968_view_group_progress_bar);
 
-        /**
-         * SETUP CONTROLS
-         */
+        // SETUP CONTROLS
 
         mViewGroupProgressBar.setOnClickListener(mViewGroupProgressBarOnClickListener);
 
-        /**
-         * LOCK PATTERN VIEW
-         */
+        // LOCK PATTERN VIEW
 
         switch (getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) {
         case Configuration.SCREENLAYOUT_SIZE_LARGE:
@@ -699,10 +688,8 @@ public class LockPatternActivity extends Activity {
         // Haptic feedback
         boolean hapticFeedbackEnabled = false;
         try {
-            /**
-             * This call requires permission WRITE_SETTINGS. Since it's not necessary, we don't need to declare that permission in manifest.
-             * Don't scare our users  :-D
-             */
+            // This call requires permission WRITE_SETTINGS. Since it's not necessary, we don't need to declare that permission in manifest.
+            // Don't scare our users  :-D
             hapticFeedbackEnabled = Settings.System.getInt(getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0;
         } catch (Throwable t) {
             // Ignore it
@@ -715,9 +702,7 @@ public class LockPatternActivity extends Activity {
         if (lastPattern != null && lastDisplayMode != null && !ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction()))
             mLockPatternView.setPattern(lastDisplayMode, lastPattern);
 
-        /**
-         * COMMAND BUTTONS
-         */
+        // COMMAND BUTTONS
 
         if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) {
             mBtnCancel.setOnClickListener(mBtnCancelOnClickListener);
@@ -731,9 +716,7 @@ public class LockPatternActivity extends Activity {
             else
                 mTextInfo.setText(R.string.alp_42447968_msg_draw_an_unlock_pattern);
 
-            /**
-             * BUTTON OK
-             */
+            // BUTTON OK
             if (mBtnOkCmd == null) mBtnOkCmd = ButtonOkCommand.CONTINUE;
             switch (mBtnOkCmd) {
             case CONTINUE:
@@ -743,9 +726,7 @@ public class LockPatternActivity extends Activity {
                 mBtnConfirm.setText(R.string.alp_42447968_cmd_confirm);
                 break;
             default:
-                /**
-                 * Do nothing.
-                 */
+                // Do nothing
                 break;
             }
             if (btnOkEnabled != null) mBtnConfirm.setEnabled(btnOkEnabled);
@@ -765,10 +746,7 @@ public class LockPatternActivity extends Activity {
         else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
             mTextInfo.setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
 
-            /**
-             * NOTE: EXTRA_PATTERN should hold a char[] array. In this case we use it as a temporary variable to hold a list of Cell.
-             */
-
+            // NOTE: EXTRA_PATTERN should hold a char[] array. In this case we use it as a temporary variable to hold a list of Cell.
             final ArrayList<Cell> pattern;
             if (getIntent().hasExtra(EXTRA_PATTERN))
                 pattern = getIntent().getParcelableArrayListExtra(EXTRA_PATTERN);
@@ -788,10 +766,7 @@ public class LockPatternActivity extends Activity {
     private void doComparePattern(@NonNull final List<Cell> pattern) {
         if (pattern == null) return;
 
-        /**
-         * Use a LoadingView because decrypting pattern might take time...
-         */
-
+        // Use a LoadingView because decrypting pattern might take time...
         mLoadingView = new LoadingView<Void, Void, Object>(this, mViewGroupProgressBar) {
 
             @Override
@@ -853,9 +828,7 @@ public class LockPatternActivity extends Activity {
         }// if
 
         if (getIntent().hasExtra(EXTRA_PATTERN)) {
-            /**
-             * Use a LoadingView because decrypting pattern might take time...
-             */
+            // Use a LoadingView because decrypting pattern might take time...
             mLoadingView = new LoadingView<Void, Void, Object>(this, mViewGroupProgressBar) {
 
                 @Override
@@ -865,7 +838,8 @@ public class LockPatternActivity extends Activity {
                     else
                         return Arrays.equals(
                                 getIntent().getCharArrayExtra(EXTRA_PATTERN),
-                                LockPatternUtils.patternToSha1(pattern).toCharArray());
+                                LockPatternUtils.patternToSha1(pattern).toCharArray()
+                        );
                 }// doInBackground()
 
                 @Override
@@ -887,9 +861,7 @@ public class LockPatternActivity extends Activity {
 
             mLoadingView.execute();
         } else {
-            /**
-             * Use a LoadingView because encrypting pattern might take time...
-             */
+            // Use a LoadingView because encrypting pattern might take time...
             mLoadingView = new LoadingView<Void, Void, Object>(this, mViewGroupProgressBar) {
 
                 @Override
@@ -923,34 +895,26 @@ public class LockPatternActivity extends Activity {
         if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))
             mIntentResult.putExtra(EXTRA_PATTERN, pattern);
         else {
-            /**
-             * If the user was "logging in", minimum try count can not be zero.
-             */
+            // If the user was "logging in", minimum try count can not be zero.
             mIntentResult.putExtra(EXTRA_RETRY_COUNT, mRetryCount + 1);
         }
 
         setResult(RESULT_OK, mIntentResult);
 
-        /**
-         * ResultReceiver
-         */
+        // ResultReceiver
         ResultReceiver receiver = getIntent().getParcelableExtra(EXTRA_RESULT_RECEIVER);
         if (receiver != null) {
             Bundle bundle = new Bundle();
             if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))
                 bundle.putCharArray(EXTRA_PATTERN, pattern);
             else {
-                /**
-                 * If the user was "logging in", minimum try count can not be zero.
-                 */
+                // If the user was "logging in", minimum try count can not be zero.
                 bundle.putInt(EXTRA_RETRY_COUNT, mRetryCount + 1);
             }
             receiver.send(RESULT_OK, bundle);
         }
 
-        /**
-         * PendingIntent
-         */
+        // PendingIntent
         PendingIntent pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_OK);
         if (pi != null) {
             try {
@@ -968,14 +932,11 @@ public class LockPatternActivity extends Activity {
      * #RESULT_FORGOT_PATTERN}).
      */
     private void finishWithNegativeResult(int resultCode) {
-        if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction()))
-            mIntentResult.putExtra(EXTRA_RETRY_COUNT, mRetryCount);
+        if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) mIntentResult.putExtra(EXTRA_RETRY_COUNT, mRetryCount);
 
         setResult(resultCode, mIntentResult);
 
-        /**
-         * ResultReceiver
-         */
+        // ResultReceiver
         ResultReceiver receiver = getIntent().getParcelableExtra(EXTRA_RESULT_RECEIVER);
         if (receiver != null) {
             Bundle resultBundle = null;
@@ -986,9 +947,7 @@ public class LockPatternActivity extends Activity {
             receiver.send(resultCode, resultBundle);
         }//if
 
-        /**
-         * PendingIntent
-         */
+        // PendingIntent
         PendingIntent pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_CANCELLED);
         if (pi != null) {
             try {
@@ -1106,10 +1065,8 @@ public class LockPatternActivity extends Activity {
                 }
             }// ACTION_CREATE_PATTERN
             else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
-                /**
-                 * We don't need to verify the extra. First, this button is only visible if there is this extra in the intent. Second, it is the
-                 * responsibility of the caller to make sure the extra is good.
-                 */
+                // We don't need to verify the extra. First, this button is only visible if there is this extra in the intent. Second, it is the
+                // responsibility of the caller to make sure the extra is good.
                 PendingIntent pi = null;
                 try {
                     pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN);
@@ -1143,9 +1100,7 @@ public class LockPatternActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            /**
-             * Do nothing. We just don't want the user to interact with controls behind this view.
-             */
+            // Do nothing. We just don't want the user to interact with controls behind this view.
         }// onClick()
 
     };// mViewGroupProgressBarOnClickListener
