@@ -373,6 +373,21 @@ public class LockPatternActivity extends Activity {
         }//startForResult()
 
         /**
+         * Builds the intent via {@link #build()} and calls {@link Context#startActivity(Intent)}.
+         */
+        public void start() {
+            mContext.startActivity(build());
+        }//start()
+
+        /**
+         * Builds the intent via {@link #build()} and calls {@link Context#startActivity(Intent, Bundle)}.
+         */
+        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+        public void start(@Nullable Bundle options) {
+            mContext.startActivity(build(), options);
+        }//start()
+
+        /**
          * Sets theme.
          *
          * @param resTheme see {@link #EXTRA_THEME}.
