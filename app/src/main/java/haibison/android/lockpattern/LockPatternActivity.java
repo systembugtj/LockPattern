@@ -483,6 +483,18 @@ public class LockPatternActivity extends Activity {
             return (T) this;
         }//setPendingIntentForgotPattern()
 
+        /**
+         * Adds these flags to the intent: {@link Intent#FLAG_ACTIVITY_CLEAR_TASK}, {@link Intent#FLAG_ACTIVITY_CLEAR_TOP},
+         * {@link Intent#FLAG_ACTIVITY_NEW_TASK}.
+         *
+         * @return this builder.
+         */
+        @NonNull
+        public <T extends IntentBuilder> T makeRestartTask() {
+            mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            return (T) this;
+        }//makeRestartTask()
+
     }//IntentBuilder
 
     /**
