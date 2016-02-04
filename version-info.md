@@ -1,4 +1,4 @@
-# `8.0.0` _(February 4th, 2016)_
+# `8.0.1` _(February 4th, 2016)_
 
 - Support: Android 7+ ([Eclair MR1][Android-Eclair-MR1])
 
@@ -11,11 +11,7 @@
 
 ## Changes
 
-- Replaced dependency [`com.android.support:support-annotations`][#com.android.support:*] with [Underdogs][#org.bitbucket.haibison:underdogs].
-- Added some more helper methods to `LockPatternActivity.IntentBuilder`:
-    + `makeRestartTask()`
-    + `start()`
-- `LockPatternActivity` now throws `UnsupportedOperationException` if incoming intent uses unsupported actions.
+- `LockPatternActivity`: fixed `UnsupportedOperationException` while checking for incoming action.
 
 
 [Android-Eclair-MR1]: https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#ECLAIR_MR1

@@ -1,6 +1,6 @@
 # android-lockpattern
 
-* Version: [`8.0.0`](version-info.md) _(February 4th, 2016)_
+* Version: [`8.0.1`](version-info.md) _(February 4th, 2016)_
 * License: [Apache License v2.0](LICENSE)
 * Project page: <https://bitbucket.org/haibison/android-lockpattern>
 * Demo: <https://play.google.com/store/apps/details?id=group.pals.android.lib.ui.lockpattern.demo>
