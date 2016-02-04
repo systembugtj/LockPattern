@@ -537,9 +537,16 @@ public class LockPatternActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Check actions
-        for (final String action : SUPPORTED_ACTIONS)
-            if (!TextUtils.equals(action, getIntent().getAction()))
-                throw new UnsupportedOperationException("Unsupported action: " + getIntent().getAction());
+        {
+            boolean found = false;
+            for (final String action : SUPPORTED_ACTIONS) {
+                if (TextUtils.equals(action, getIntent().getAction())) {
+                    found = true;
+                    break;
+                }//if
+            }//for
+            if (!found) throw new UnsupportedOperationException("Unsupported action: " + getIntent().getAction());
+        }//check action
 
         // Theme
         if (getIntent().hasExtra(EXTRA_THEME))
