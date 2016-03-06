@@ -8,6 +8,10 @@
 
 ---
 
+[Vote for Bitbucket Maven repository](https://bitbucket.org/site/master/issues/12466/providing-built-int-service-like-jitpackio)
+
+---
+
 ## Features
 
 - Requires: Android 2.1+ (API 7+)
