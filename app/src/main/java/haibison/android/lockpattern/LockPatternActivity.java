@@ -328,6 +328,37 @@ public class LockPatternActivity extends Activity {
         }//build()
 
         /**
+         * Calls {@link #build()} and builds new {@link PendingIntent} from it.
+         *
+         * @param requestCode request code.
+         * @param flags       flags.
+         * @return the new pending intent.
+         */
+        @Nullable
+        public PendingIntent buildPendingIntent(int requestCode, int flags) {
+            //noinspection ResourceType
+            return PendingIntent.getActivity(mContext, requestCode, build(), flags);
+        }//buildPendingIntent()
+
+        /**
+         * Calls {@link #build()} and builds new {@link PendingIntent} from it.
+         *
+         * @param requestCode request code.
+         * @param flags       flags.
+         * @param options     options.
+         * @return the new pending intent.
+         */
+        @Nullable
+        public PendingIntent buildPendingIntent(int requestCode, int flags, @Nullable Bundle options) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                //noinspection ResourceType
+                return PendingIntent.getActivity(mContext, requestCode, build(), flags, options);
+            }//if
+
+            return buildPendingIntent(requestCode, flags);
+        }//buildPendingIntent()
+
+        /**
          * Builds the intent via {@link #build()} and calls {@link #startActivityForResult(Intent, int)}.
          *
          * @param activity    your activity.
