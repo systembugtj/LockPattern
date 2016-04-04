@@ -15,6 +15,12 @@
    limitations under the License.
 -->
 
+<!--
+    We sincerely thank @cdotchen, for helping us tranlate this file into his mother language.
+
+    https://bitbucket.org/cdotchen/
+-->
+
 <resources>
 
     <string name="alp_42447968_cmd_confirm">確認</string>

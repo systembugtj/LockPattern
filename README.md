@@ -44,6 +44,7 @@ We sincerely thank all of our friends -- who have been contributing to this proj
 * Yan Cheng Cheok (Project Admin of [JStock](http://jstock.sourceforge.net/))
 * [Damonzh](https://github.com/Damonzh)
 * [Nikita Osipov](https://github.com/nikkoss)
+* [cdotchen](https://bitbucket.org/cdotchen/)
 * And others
 
 ---
