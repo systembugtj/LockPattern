@@ -30,7 +30,7 @@ import haibison.android.underdogs.Nullable;
 
 /**
  * All settings for the library. They are stored in {@link SharedPreferences}.
- * <p/>
+ * <p>
  * For some options, you can set them directly via tag {@code <meta-data>} inside tag {@code <activity>} in your {@code AndroidManifest.xml}.
  * Refer to setter methods for details. Note that the values in the manifest have <em>higher priority</em> than the ones from this class.
  *
@@ -149,7 +149,7 @@ public class AlpSettings {
 
         /**
          * Sets stealth mode.
-         * <p/>
+         * <p>
          * You can set this value in {@code AndroidManifest.xml} with {@link #METADATA_STEALTH_MODE}.
          *
          * @param context the context.
@@ -186,7 +186,7 @@ public class AlpSettings {
 
         /**
          * Sets minimum wired dots allowed for a pattern.
-         * <p/>
+         * <p>
          * You can set this value in {@code AndroidManifest.xml} with {@link #METADATA_MIN_WIRED_DOTS}.
          *
          * @param context the context.
@@ -224,7 +224,7 @@ public class AlpSettings {
 
         /**
          * Sets max retries allowed in mode comparing pattern.
-         * <p/>
+         * <p>
          * You can set this value in {@code AndroidManifest.xml} with {@link #METADATA_MAX_RETRIES}.
          *
          * @param context the context.
@@ -262,7 +262,7 @@ public class AlpSettings {
 
         /**
          * Sets wired dots for a "CAPTCHA" pattern.
-         * <p/>
+         * <p>
          * You can set this value in {@code AndroidManifest.xml} with {@link #METADATA_CAPTCHA_WIRED_DOTS}.
          *
          * @param context the context.
@@ -317,7 +317,7 @@ public class AlpSettings {
 
         /**
          * Sets auto-save pattern mode.
-         * <p/>
+         * <p>
          * You can set this value in {@code AndroidManifest.xml} with {@link #METADATA_AUTO_SAVE_PATTERN}.
          *
          * @param context the context.
@@ -366,7 +366,7 @@ public class AlpSettings {
 
         /**
          * Sets encrypter class.
-         * <p/>
+         * <p>
          * You can set this value in {@code AndroidManifest.xml} with {@link #METADATA_ENCRYPTER_CLASS}.
          *
          * @param context the context.
@@ -378,7 +378,7 @@ public class AlpSettings {
 
         /**
          * Sets encrypter class.
-         * <p/>
+         * <p>
          * You can set this value in {@code AndroidManifest.xml} with {@link #METADATA_ENCRYPTER_CLASS}.
          *
          * @param context the context.

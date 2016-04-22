@@ -49,7 +49,7 @@ import haibison.android.lockpattern.utils.ResourceUtils;
 
 /**
  * Displays and detects the user's unlock attempt, which is a drag of a finger across 9 regions of the screen.
- * <p/>
+ * <p>
  * Is also capable of displaying a static pattern in "in progress", "wrong" or "correct" states.
  */
 public class LockPatternView extends View {

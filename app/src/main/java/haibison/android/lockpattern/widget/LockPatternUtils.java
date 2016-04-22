@@ -130,7 +130,7 @@ public class LockPatternUtils {
 
     /**
      * Generates a random "CAPTCHA" pattern. By saying "CAPTCHA", this method ensures that the generated pattern is easy for the user to re-draw.
-     * <p/>
+     * <p>
      * <strong>Notes:</strong> This method is <b>not</b> optimized and <b>not</b> benchmarked yet for large size of the pattern's matrix.
      * Currently it works fine with a matrix of {@code 3x3} cells. Be careful when the size increases.
      *
