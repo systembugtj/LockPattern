@@ -25,7 +25,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
-import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
@@ -55,6 +56,7 @@ import haibison.android.lockpattern.widget.LockPatternUtils;
 import haibison.android.lockpattern.widget.LockPatternView;
 import haibison.android.lockpattern.widget.LockPatternView.Cell;
 import haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
+import haibison.android.underdogs.Api;
 import haibison.android.underdogs.NonNull;
 import haibison.android.underdogs.Nullable;
 import haibison.android.underdogs.StyleRes;
@@ -349,8 +351,9 @@ public class LockPatternActivity extends Activity {
          * @return the new pending intent.
          */
         @Nullable
-        public PendingIntent buildPendingIntent(int requestCode, int flags, @Nullable Bundle options) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        public PendingIntent buildPendingIntent(int requestCode, int flags,
+                                                @Api(level = VERSION_CODES.JELLY_BEAN, required = false) @Nullable Bundle options) {
+            if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
                 //noinspection ResourceType
                 return PendingIntent.getActivity(mContext, requestCode, build(), flags, options);
             }//if
@@ -375,7 +378,8 @@ public class LockPatternActivity extends Activity {
          * @param requestCode request code.
          * @param options     options.
          */
-        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+        @Api(level = VERSION_CODES.JELLY_BEAN)
+        @TargetApi(VERSION_CODES.JELLY_BEAN)
         public void startForResult(@NonNull Activity activity, int requestCode, @Nullable Bundle options) {
             activity.startActivityForResult(build(), requestCode, options);
         }//startForResult()
@@ -386,7 +390,8 @@ public class LockPatternActivity extends Activity {
          * @param fragment    your fragment.
          * @param requestCode request code.
          */
-        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+        @Api(level = VERSION_CODES.HONEYCOMB)
+        @TargetApi(VERSION_CODES.HONEYCOMB)
         public void startForResult(@NonNull Fragment fragment, int requestCode) {
             fragment.startActivityForResult(build(), requestCode);
         }//startForResult()
@@ -398,7 +403,8 @@ public class LockPatternActivity extends Activity {
          * @param requestCode request code.
          * @param options     options.
          */
-        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+        @Api(level = VERSION_CODES.JELLY_BEAN)
+        @TargetApi(VERSION_CODES.JELLY_BEAN)
         public void startForResult(@NonNull Fragment fragment, int requestCode, @Nullable Bundle options) {
             fragment.startActivityForResult(build(), requestCode, options);
         }//startForResult()
@@ -413,7 +419,8 @@ public class LockPatternActivity extends Activity {
         /**
          * Builds the intent via {@link #build()} and calls {@link Context#startActivity(Intent, Bundle)}.
          */
-        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+        @Api(level = VERSION_CODES.JELLY_BEAN)
+        @TargetApi(VERSION_CODES.JELLY_BEAN)
         public void start(@Nullable Bundle options) {
             mContext.startActivity(build(), options);
         }//start()
@@ -630,8 +637,7 @@ public class LockPatternActivity extends Activity {
         //
         // This piece of code is copied from android.view.Window. You can find it by searching for methods shouldCloseOnTouch() and
         // isOutOfBounds().
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB && event.getAction() == MotionEvent.ACTION_DOWN
-                && getWindow().peekDecorView() != null) {
+        if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB && event.getAction() == MotionEvent.ACTION_DOWN && getWindow().peekDecorView() != null) {
             final int x = (int) event.getX();
             final int y = (int) event.getY();
             final int slop = ViewConfiguration.get(this).getScaledWindowTouchSlop();
