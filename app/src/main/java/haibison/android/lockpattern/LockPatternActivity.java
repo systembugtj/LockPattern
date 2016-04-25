@@ -539,8 +539,6 @@ public class LockPatternActivity extends Activity {
 
     /**
      * Helper enum for button OK commands. (Because we use only one "OK" button for different commands).
-     *
-     * @author Hai Bison
      */
     private enum ButtonOkCommand {
         CONTINUE, FORGOT_PATTERN, DONE
