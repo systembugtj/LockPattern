@@ -294,19 +294,21 @@ public class LockPatternActivity extends Activity {
             return new IntentBuilder(context, LockPatternActivity.class, ACTION_VERIFY_CAPTCHA);
         }//newCaptchaVerifier()
 
+        @NonNull
         private final Context mContext;
+        @NonNull
         private final Intent mIntent;
 
         /**
          * Makes new instance.
          *
          * @param context the context.
-         * @param clazz   activity class.
+         * @param clazz   class of {@link LockPatternActivity} or its subclass.
          * @param action  action.
          */
-        public IntentBuilder(@NonNull Context context, @NonNull Class<? extends Activity> clazz, @NonNull String action) {
+        public IntentBuilder(@NonNull Context context, @NonNull Class<? extends LockPatternActivity> cls, @NonNull String action) {
             mContext = context;
-            mIntent = new Intent(action, null, context, clazz);
+            mIntent = new Intent(action, null, context, cls);
         }//IntentBuilder()
 
         /**
