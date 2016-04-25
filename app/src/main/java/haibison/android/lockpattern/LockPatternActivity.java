@@ -16,6 +16,7 @@
 
 package haibison.android.lockpattern;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
@@ -59,6 +60,7 @@ import haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
 import haibison.android.underdogs.Api;
 import haibison.android.underdogs.NonNull;
 import haibison.android.underdogs.Nullable;
+import haibison.android.underdogs.Permissions;
 import haibison.android.underdogs.StyleRes;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
@@ -94,6 +96,7 @@ import static haibison.android.lockpattern.utils.AlpSettings.Security.METADATA_E
  * @author Hai Bison
  * @since v1.0
  */
+@Permissions(names = {Manifest.permission.WRITE_SETTINGS}, required = false)
 public class LockPatternActivity extends Activity {
 
     private static final String CLASSNAME = LockPatternActivity.class.getName();
