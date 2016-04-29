@@ -98,13 +98,13 @@ public class FloatAnimator {
      */
     private static final long ANIMATION_DELAY = 1;
 
-    private final float mStartValue, mEndValue;
-    private final long mDuration;
-    private float mAnimatedValue;
+    private final float startValue, endValue;
+    private final long duration;
+    private float animatedValue;
 
-    private List<EventListener> mEventListeners;
-    private Handler mHandler;
-    private long mStartTime;
+    private List<EventListener> eventListeners;
+    private Handler handler;
+    private long startTime;
 
     /**
      * Creates new instance.
@@ -114,11 +114,11 @@ public class FloatAnimator {
      * @param duration duration, in milliseconds. This should not be long, as delay value between animation frames is just 1 millisecond.
      */
     public FloatAnimator(float start, float end, long duration) {
-        mStartValue = start;
-        mEndValue = end;
-        mDuration = duration;
+        startValue = start;
+        endValue = end;
+        this.duration = duration;
 
-        mAnimatedValue = mStartValue;
+        animatedValue = startValue;
     }// FloatAnimator()
 
     /**
@@ -129,8 +129,8 @@ public class FloatAnimator {
     public void addEventListener(@Nullable EventListener listener) {
         if (listener == null) return;
 
-        if (mEventListeners == null) mEventListeners = Lists.newArrayList();
-        mEventListeners.add(listener);
+        if (eventListeners == null) eventListeners = Lists.newArrayList();
+        eventListeners.add(listener);
     }// addEventListener()
 
     /**
@@ -139,36 +139,35 @@ public class FloatAnimator {
      * @return animated value.
      */
     public float getAnimatedValue() {
-        return mAnimatedValue;
+        return animatedValue;
     }// getAnimatedValue()
 
     /**
      * Starts animating.
      */
     public void start() {
-        if (mHandler != null)
-            return;
+        if (handler != null) return;
 
         notifyAnimationStart();
 
-        mStartTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
 
-        mHandler = new Handler();
-        mHandler.post(new Runnable() {
+        handler = new Handler();
+        handler.post(new Runnable() {
 
             @Override
             public void run() {
-                final Handler handler = mHandler;
+                final Handler handler = FloatAnimator.this.handler;
                 if (handler == null) return;
 
-                final long elapsedTime = System.currentTimeMillis() - mStartTime;
-                if (elapsedTime > mDuration) {
-                    mHandler = null;
+                final long elapsedTime = System.currentTimeMillis() - startTime;
+                if (elapsedTime > duration) {
+                    FloatAnimator.this.handler = null;
                     notifyAnimationEnd();
                 } else {
-                    float fraction = mDuration > 0 ? (float) (elapsedTime) / mDuration : 1f;
-                    float delta = mEndValue - mStartValue;
-                    mAnimatedValue = mStartValue + delta * fraction;
+                    float fraction = duration > 0 ? (float) (elapsedTime) / duration : 1f;
+                    float delta = endValue - startValue;
+                    animatedValue = startValue + delta * fraction;
 
                     notifyAnimationUpdate();
                     handler.postDelayed(this, ANIMATION_DELAY);
@@ -182,10 +181,10 @@ public class FloatAnimator {
      * Cancels animating.
      */
     public void cancel() {
-        if (mHandler == null) return;
+        if (handler == null) return;
 
-        mHandler.removeCallbacksAndMessages(null);
-        mHandler = null;
+        handler.removeCallbacksAndMessages(null);
+        handler = null;
 
         notifyAnimationCancel();
         notifyAnimationEnd();
@@ -195,7 +194,7 @@ public class FloatAnimator {
      * Notifies all listeners that animation starts.
      */
     protected void notifyAnimationStart() {
-        final List<EventListener> listeners = mEventListeners;
+        final List<EventListener> listeners = eventListeners;
         if (listeners != null) {
             for (EventListener listener : listeners)
                 listener.onAnimationStart(this);
@@ -206,7 +205,7 @@ public class FloatAnimator {
      * Notifies all listeners that animation updates.
      */
     protected void notifyAnimationUpdate() {
-        final List<EventListener> listeners = mEventListeners;
+        final List<EventListener> listeners = eventListeners;
         if (listeners != null) {
             for (EventListener listener : listeners)
                 listener.onAnimationUpdate(this);
@@ -217,7 +216,7 @@ public class FloatAnimator {
      * Notifies all listeners that animation cancels.
      */
     protected void notifyAnimationCancel() {
-        final List<EventListener> listeners = mEventListeners;
+        final List<EventListener> listeners = eventListeners;
         if (listeners != null) {
             for (EventListener listener : listeners)
                 listener.onAnimationCancel(this);
@@ -228,7 +227,7 @@ public class FloatAnimator {
      * Notifies all listeners that animation ends.
      */
     protected void notifyAnimationEnd() {
-        final List<EventListener> listeners = mEventListeners;
+        final List<EventListener> listeners = eventListeners;
         if (listeners != null) {
             for (EventListener listener : listeners)
                 listener.onAnimationEnd(this);

@@ -37,7 +37,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
     @SuppressWarnings("unused")
     private static final String CLASSNAME = LoadingView.class.getName();
 
-    private final View mView;
+    private final View view;
 
     /**
      * Delay time in milliseconds. Default delay is half a second.
@@ -58,7 +58,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      * @param view    the view to be controlled by this async task.
      */
     public LoadingView(@NonNull Context context, @NonNull View view) {
-        mView = view;
+        this.view = view;
     }// LoadingView()
 
     /**
@@ -71,7 +71,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
 
             @Override
             public void run() {
-                if (!mFinished) mView.setVisibility(View.VISIBLE);
+                if (!mFinished) view.setVisibility(View.VISIBLE);
             }// run()
 
         }, getDelayTime());
@@ -98,7 +98,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
 
     private void doFinish() {
         mFinished = true;
-        mView.setVisibility(View.GONE);
+        view.setVisibility(View.GONE);
     }// doFinish()
 
     /**
