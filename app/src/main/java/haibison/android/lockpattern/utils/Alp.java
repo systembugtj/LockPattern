@@ -46,4 +46,9 @@ public class Alp {
      */
     public static final String UID = "a6eedbe5-1cf9-4684-8134-ad4ec9f6a131";
 
+    /**
+     * Tag of this library, which can be used for logging.
+     */
+    public static final String TAG = "ALP_42447968";
+
 }
