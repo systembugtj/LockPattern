@@ -61,6 +61,7 @@ import haibison.android.underdogs.Api;
 import haibison.android.underdogs.NonNull;
 import haibison.android.underdogs.Nullable;
 import haibison.android.underdogs.Permissions;
+import haibison.android.underdogs.StringRes;
 import haibison.android.underdogs.StyleRes;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
@@ -246,6 +247,13 @@ public class LockPatternActivity extends Activity {
      * @since v2.8 beta
      */
     public static final String EXTRA_PENDING_INTENT_FORGOT_PATTERN = CLASSNAME + ".PENDING_INTENT_FORGOT_PATTERN";
+
+    /**
+     * Use this extra to provide title for the activity.
+     * <p>
+     * Type: {@code int} (for a string resource ID), or {@link CharSequence}.
+     */
+    public static final String EXTRA_TITLE = CLASSNAME + ".TITLE";
 
     /**
      * Intent builder.
@@ -538,6 +546,32 @@ public class LockPatternActivity extends Activity {
             return (T) this;
         }//makeRestartTask()
 
+        /**
+         * Sets title via {@link #EXTRA_TITLE}.
+         *
+         * @param resId string resource ID of the title. You can pass {@code 0} to remove the extra.
+         * @return this builder.
+         */
+        @NonNull
+        public <T extends IntentBuilder> T setTitle(@StringRes int resId) {
+            if (resId != 0) intent.putExtra(EXTRA_TITLE, resId);
+            else intent.removeExtra(EXTRA_TITLE);
+
+            return (T) this;
+        }//setTitle()
+
+        /**
+         * Sets title via {@link #EXTRA_TITLE}.
+         *
+         * @param title the title.
+         * @return this builder.
+         */
+        @NonNull
+        public <T extends IntentBuilder> T setTitle(@Nullable CharSequence title) {
+            intent.putExtra(EXTRA_TITLE, title);
+            return (T) this;
+        }//setTitle()
+
     }//IntentBuilder
 
     /**
@@ -608,8 +642,15 @@ public class LockPatternActivity extends Activity {
         intentResult = new Intent();
         setResult(RESULT_CANCELED, intentResult);
 
+        // Title
+        if (getIntent().hasExtra(EXTRA_TITLE)) {
+            Object title = getIntent().getExtras().get(EXTRA_TITLE);
+            if (title instanceof Integer) title = getString((Integer) title);
+            setTitle((CharSequence) title);
+        }//if
+
         initContentView();
-    }// onCreate()
+    }//onCreate()
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
