@@ -24,6 +24,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
+import haibison.android.lockpattern.Alp;
 import haibison.android.lockpattern.R;
 import haibison.android.underdogs.NonNull;
 import haibison.android.underdogs.Nullable;

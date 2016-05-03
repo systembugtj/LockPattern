@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package haibison.android.lockpattern.utils;
+package haibison.android.lockpattern;
 
 /**
  * Some constants about the library.
