@@ -97,7 +97,7 @@ import static haibison.android.lockpattern.utils.AlpSettings.Security.METADATA_E
  * @author Hai Bison
  * @since v1.0
  */
-@Permissions(names = {Manifest.permission.WRITE_SETTINGS}, required = false)
+@Permissions(names = {Manifest.permission.WRITE_SETTINGS}, required = false, description = "For *reading* haptic feedback setting")
 public class LockPatternActivity extends Activity {
 
     private static final String CLASSNAME = LockPatternActivity.class.getName();
