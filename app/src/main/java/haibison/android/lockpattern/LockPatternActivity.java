@@ -58,6 +58,7 @@ import haibison.android.lockpattern.widget.LockPatternView;
 import haibison.android.lockpattern.widget.LockPatternView.Cell;
 import haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
 import haibison.android.underdogs.Api;
+import haibison.android.underdogs.LayoutRes;
 import haibison.android.underdogs.NonNull;
 import haibison.android.underdogs.Nullable;
 import haibison.android.underdogs.Permissions;
@@ -254,6 +255,27 @@ public class LockPatternActivity extends Activity {
      * Type: {@code int} (for a string resource ID), or {@link CharSequence}.
      */
     public static final String EXTRA_TITLE = CLASSNAME + ".TITLE";
+
+    /**
+     * Use this extra to provide layout for the activity. To have 2 or more layouts in different screen states (portrait, landscape...) but
+     * using only one ID, you can do these steps:
+     * <p>
+     * <ul>
+     *     <li>For example you have 2 layouts: {@code layout/lock_pattern_activity.xml}, {@code layout/lock_pattern_activity_land.xml}</li>
+     *
+     *     <li>Make new file {@code values-land/layouts.xml}, insert this value:
+     *     {@code <item name="lock_pattern_activity" type="layout">@layout/lock_pattern_activity_land</item>}</li>
+     *
+     *     <li>Pass {@code R.layout.lock_pattern_activity} to this extra.</li>
+     * </ul>
+     * <p>
+     * <strong>Note:<strong> please have a look at {@code layout/alp_42447968_lock_pattern_activity} and
+     * {@code layout/alp_42447968_lock_pattern_activity_land}. In your layouts, you have to provide same components with same IDs.
+     * <p>
+     * Type: {@code int}.
+     */
+    @LayoutRes
+    public static final String EXTRA_LAYOUT = CLASSNAME + ".LAYOUT";
 
     /**
      * Intent builder.
@@ -572,6 +594,20 @@ public class LockPatternActivity extends Activity {
             return (T) this;
         }//setTitle()
 
+        /**
+         * Sets layout via {@link #EXTRA_LAYOUT}.
+         *
+         * @param resId layout resource ID. You can pass {@code 0} to remove the extra.
+         * @return this builder.
+         */
+        @NonNull
+        public <T extends IntentBuilder> T setLayout(@LayoutRes int resId) {
+            if (resId != 0) intent.putExtra(EXTRA_LAYOUT, resId);
+            else intent.removeExtra(EXTRA_LAYOUT);
+
+            return (T) this;
+        }//setLayout()
+
     }//IntentBuilder
 
     /**
@@ -767,7 +803,7 @@ public class LockPatternActivity extends Activity {
         LockPatternView.DisplayMode lastDisplayMode = mLockPatternView != null ? mLockPatternView.getDisplayMode() : null;
         List<Cell> lastPattern = mLockPatternView != null ? mLockPatternView.getPattern() : null;
 
-        setContentView(R.layout.alp_42447968_lock_pattern_activity);
+        setContentView(getIntent().getIntExtra(EXTRA_LAYOUT, R.layout.alp_42447968_lock_pattern_activity));
         UI.adjustDialogSizeForLargeScreens(getWindow());
 
         // MAP CONTROLS
