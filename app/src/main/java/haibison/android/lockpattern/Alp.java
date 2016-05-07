@@ -21,13 +21,10 @@ package haibison.android.lockpattern;
  *
  * @author Hai Bison
  */
-public class Alp {
+public final class Alp {
 
-    /**
-     * This is singleton class.
-     */
-    private Alp() {
-    }// Alp
+    // Singleton class
+    private Alp() {}
 
     /**
      * The library name.
@@ -37,7 +34,7 @@ public class Alp {
     /**
      * The library version name.
      */
-    public static final String LIB_VERSION_NAME = "8.0.1";
+    public static final String LIB_VERSION_NAME = "9.0.0";
 
     /**
      * This unique ID is used for some stuffs such as preferences' file name.
@@ -47,7 +44,7 @@ public class Alp {
     public static final String UID = "a6eedbe5-1cf9-4684-8134-ad4ec9f6a131";
 
     /**
-     * Tag of this library, which can be used for logging.
+     * Tag of this library, which can be used for logging...
      */
     public static final String TAG = "ALP_42447968";
 
