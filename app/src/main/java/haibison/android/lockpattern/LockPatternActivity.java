@@ -269,7 +269,7 @@ public class LockPatternActivity extends Activity {
      *     <li>Pass {@code R.layout.lock_pattern_activity} to this extra.</li>
      * </ul>
      * <p>
-     * <strong>Note:<strong> please have a look at {@code layout/alp_42447968_lock_pattern_activity} and
+     * <strong>Note:</strong> please have a look at {@code layout/alp_42447968_lock_pattern_activity} and
      * {@code layout/alp_42447968_lock_pattern_activity_land}. In your layouts, you have to provide same components with same IDs.
      * <p>
      * Type: {@code int}.
