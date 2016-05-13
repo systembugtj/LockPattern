@@ -15,6 +15,12 @@
    limitations under the License.
 -->
 
+<!--
+    Special thanks to Andre Batista da Silva for his contribution.
+
+    https://bitbucket.org/andre_bts/
+-->
+
 <resources>
 
     <string name="alp_42447968_cmd_confirm">Confirmar</string>

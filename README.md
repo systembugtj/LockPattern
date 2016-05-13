@@ -45,6 +45,7 @@ We sincerely thank all of our friends -- who have been contributing to this proj
 * [Damonzh](https://github.com/Damonzh)
 * [Nikita Osipov](https://github.com/nikkoss)
 * [cdotchen](https://bitbucket.org/cdotchen/)
+* [Andre Batista da Silva](https://bitbucket.org/andre_bts/)
 * And others
 
 ---
