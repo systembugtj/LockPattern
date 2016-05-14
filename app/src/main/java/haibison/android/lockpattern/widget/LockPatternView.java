@@ -337,11 +337,9 @@ public class LockPatternView extends View {
     public LockPatternView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.Alp_42447968_LockPatternView);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Alp_42447968_LockPatternView);
 
-        final String aspect = a
-                .getString(R.styleable.Alp_42447968_LockPatternView_alp_42447968_aspect);
+        final String aspect = a.getString(R.styleable.Alp_42447968_LockPatternView_alp_42447968_aspect);
 
         if ("square".equals(aspect)) {
             mAspect = ASPECT_SQUARE;
@@ -358,43 +356,32 @@ public class LockPatternView extends View {
         mPathPaint.setAntiAlias(true);
         mPathPaint.setDither(true);
 
-        mRegularColor = getResources().getColor(
-                ResourceUtils.resolveAttribute(getContext(),
-                        R.attr.alp_42447968_color_lock_pattern_view_regular));
-        mErrorColor = getResources().getColor(
-                ResourceUtils.resolveAttribute(getContext(),
-                        R.attr.alp_42447968_color_lock_pattern_view_error));
-        mSuccessColor = getResources().getColor(
-                ResourceUtils.resolveAttribute(getContext(),
-                        R.attr.alp_42447968_color_lock_pattern_view_success));
+        mRegularColor = context.getResources().getColor(
+                ResourceUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_regular)
+        );
+        mErrorColor = context.getResources().getColor(
+                ResourceUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_error)
+        );
+        mSuccessColor = context.getResources().getColor(
+                ResourceUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_success)
+        );
 
-        mRegularColor = a.getColor(
-                R.styleable.Alp_42447968_LockPatternView_alp_42447968_regularColor,
-                mRegularColor);
-        mErrorColor = a.getColor(
-                R.styleable.Alp_42447968_LockPatternView_alp_42447968_errorColor,
-                mErrorColor);
-        mSuccessColor = a.getColor(
-                R.styleable.Alp_42447968_LockPatternView_alp_42447968_successColor,
-                mSuccessColor);
+        mRegularColor = a.getColor(R.styleable.Alp_42447968_LockPatternView_alp_42447968_regularColor, mRegularColor);
+        mErrorColor = a.getColor(R.styleable.Alp_42447968_LockPatternView_alp_42447968_errorColor, mErrorColor);
+        mSuccessColor = a.getColor(R.styleable.Alp_42447968_LockPatternView_alp_42447968_successColor, mSuccessColor);
 
-        int pathColor = a.getColor(
-                R.styleable.Alp_42447968_LockPatternView_alp_42447968_pathColor,
-                mRegularColor);
+        int pathColor = a.getColor(R.styleable.Alp_42447968_LockPatternView_alp_42447968_pathColor, mRegularColor);
         mPathPaint.setColor(pathColor);
 
         mPathPaint.setStyle(Paint.Style.STROKE);
         mPathPaint.setStrokeJoin(Paint.Join.ROUND);
         mPathPaint.setStrokeCap(Paint.Cap.ROUND);
 
-        mPathWidth = getResources().getDimensionPixelSize(
-                R.dimen.alp_42447968_lock_pattern_dot_line_width);
+        mPathWidth = context.getResources().getDimensionPixelSize(R.dimen.alp_42447968_lock_pattern_dot_line_width);
         mPathPaint.setStrokeWidth(mPathWidth);
 
-        mDotSize = getResources().getDimensionPixelSize(
-                R.dimen.alp_42447968_lock_pattern_dot_size);
-        mDotSizeActivated = getResources().getDimensionPixelSize(
-                R.dimen.alp_42447968_lock_pattern_dot_size_activated);
+        mDotSize = context.getResources().getDimensionPixelSize(R.dimen.alp_42447968_lock_pattern_dot_size);
+        mDotSizeActivated = context.getResources().getDimensionPixelSize(R.dimen.alp_42447968_lock_pattern_dot_size_activated);
 
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
@@ -407,12 +394,9 @@ public class LockPatternView extends View {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-                && !isInEditMode()) {
-            mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
-                    context, android.R.interpolator.fast_out_slow_in);
-            mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(
-                    context, android.R.interpolator.linear_out_slow_in);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && !isInEditMode()) {
+            mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(context, android.R.interpolator.fast_out_slow_in);
+            mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(context, android.R.interpolator.linear_out_slow_in);
         }// if
     }// LockPatternView()
 

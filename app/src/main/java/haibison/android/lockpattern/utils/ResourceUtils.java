@@ -31,11 +31,8 @@ import haibison.android.underdogs.NonNull;
  */
 public class ResourceUtils {
 
-    /**
-     * This is singleton class.
-     */
-    private ResourceUtils() {
-    }// ResourceUtils()
+    // Singleton class
+    private ResourceUtils() {}
 
     /**
      * Convenient method for {@link Context#getTheme()} and {@link Theme#resolveAttribute(int, TypedValue, boolean)}.
@@ -44,9 +41,9 @@ public class ResourceUtils {
      * @param resAttr The resource identifier of the desired theme attribute.
      * @return the resource ID that {@link TypedValue#resourceId} points to, or {@code 0} if not found.
      */
-    public static int resolveAttribute(@NonNull Context context, @AttrRes int resAttr) {
-        return resolveAttribute(context, resAttr, 0);
-    }// resolveAttribute()
+    public static int resolveResourceId(@NonNull Context context, @AttrRes int resAttr) {
+        return resolveResourceId(context, resAttr, 0);
+    }//resolveResourceId()
 
     /**
      * Convenient method for {@link Context#getTheme()} and {@link Theme#resolveAttribute(int, TypedValue, boolean)}.
@@ -56,10 +53,10 @@ public class ResourceUtils {
      * @param defaultValue the default value if cannot resolve {@code resId}.
      * @return the resource ID that {@link TypedValue#resourceId} points to, or {@code defaultValue} if not found.
      */
-    public static int resolveAttribute(@NonNull Context context, @AttrRes int resAttr, int defaultValue) {
+    public static int resolveResourceId(@NonNull Context context, @AttrRes int resAttr, int defaultValue) {
         TypedValue typedValue = new TypedValue();
         if (context.getTheme().resolveAttribute(resAttr, typedValue, true)) return typedValue.resourceId;
         return defaultValue;
-    }// resolveAttribute()
+    }//resolveResourceId()
 
 }

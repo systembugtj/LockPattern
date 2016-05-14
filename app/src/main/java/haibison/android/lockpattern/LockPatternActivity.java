@@ -665,7 +665,7 @@ public class LockPatternActivity extends Activity {
             setTheme(getIntent().getIntExtra(EXTRA_THEME, R.style.Alp_42447968_Theme_Dark));
 
         // Apply theme resources
-        final int resThemeResources = ResourceUtils.resolveAttribute(this, R.attr.alp_42447968_theme_resources);
+        final int resThemeResources = ResourceUtils.resolveResourceId(this, R.attr.alp_42447968_theme_resources);
         if (resThemeResources == 0)
             throw new RuntimeException("Please provide theme resource via attribute `alp_42447968_theme_resources`."
                     + " For example: <item name=\"alp_42447968_theme_resources\">@style/Alp_42447968.ThemeResources.Light</item>"
