@@ -30,6 +30,7 @@ import haibison.android.lockpattern.collect.Lists;
 import haibison.android.lockpattern.utils.Randoms;
 import haibison.android.underdogs.NonNull;
 
+import static haibison.android.lockpattern.Alp.TAG;
 import static haibison.android.lockpattern.BuildConfig.DEBUG;
 
 /**
@@ -40,7 +41,7 @@ public class LockPatternUtils {
     /**
      * Used for debugging...
      */
-    private static final String CLASSNAME = LockPatternUtils.class.getName();
+    private static final String CLASSNAME = LockPatternUtils.class.getSimpleName();
 
     /**
      * "UTF-8"
@@ -153,7 +154,7 @@ public class LockPatternUtils {
         while (usedIds.size() < size) {
             // We start from an empty matrix, so there's always a break point to exit this loop.
 
-            if (DEBUG) Log.d(CLASSNAME, " >> lastId = " + lastId);
+            if (DEBUG) Log.d(TAG, CLASSNAME + " >> lastId = " + lastId);
 
             final int lastRow = lastId / LockPatternView.MATRIX_WIDTH;
             final int lastCol = lastId % LockPatternView.MATRIX_WIDTH;

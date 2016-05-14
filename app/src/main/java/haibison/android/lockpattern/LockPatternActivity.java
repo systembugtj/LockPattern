@@ -66,6 +66,7 @@ import haibison.android.underdogs.StringRes;
 import haibison.android.underdogs.StyleRes;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
+import static haibison.android.lockpattern.Alp.TAG;
 import static haibison.android.lockpattern.BuildConfig.DEBUG;
 import static haibison.android.lockpattern.utils.AlpSettings.Display.METADATA_CAPTCHA_WIRED_DOTS;
 import static haibison.android.lockpattern.utils.AlpSettings.Display.METADATA_MAX_RETRIES;
@@ -101,7 +102,7 @@ import static haibison.android.lockpattern.utils.AlpSettings.Security.METADATA_E
 @Permissions(names = {Manifest.permission.WRITE_SETTINGS}, required = false, description = "For *reading* haptic feedback setting")
 public class LockPatternActivity extends Activity {
 
-    private static final String CLASSNAME = LockPatternActivity.class.getName();
+    private static final String CLASSNAME = LockPatternActivity.class.getSimpleName();
 
     /**
      * Use this action to create new pattern. You can provide an {@link Encrypter} with {@link
@@ -692,7 +693,7 @@ public class LockPatternActivity extends Activity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if (DEBUG) Log.d(CLASSNAME, "onConfigurationChanged()");
+        if (DEBUG) Log.d(TAG, CLASSNAME + "#onConfigurationChanged()");
 
         initContentView();
     }// onConfigurationChanged()
@@ -1071,7 +1072,7 @@ public class LockPatternActivity extends Activity {
             try {
                 pi.send(this, RESULT_OK, intentResult);
             } catch (Throwable t) {
-                Log.e(CLASSNAME, "Error sending PendingIntent: " + pi, t);
+                Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + pi, t);
             }
         }//if
 
@@ -1104,7 +1105,7 @@ public class LockPatternActivity extends Activity {
             try {
                 pi.send(this, resultCode, intentResult);
             } catch (Throwable t) {
-                Log.e(CLASSNAME, "Error sending PendingIntent: " + pi, t);
+                Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + pi, t);
             }
         }//if
 
@@ -1223,7 +1224,7 @@ public class LockPatternActivity extends Activity {
                     pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN);
                     if (pi != null) pi.send();
                 } catch (Throwable t) {
-                    Log.e(CLASSNAME, "Error sending pending intent: " + pi, t);
+                    Log.e(TAG, CLASSNAME + " >> Failed sending pending intent: " + pi, t);
                 }
                 finishWithNegativeResult(RESULT_FORGOT_PATTERN);
             }// ACTION_COMPARE_PATTERN

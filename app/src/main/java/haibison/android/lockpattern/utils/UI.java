@@ -25,6 +25,7 @@ import android.view.Window;
 
 import haibison.android.underdogs.NonNull;
 
+import static haibison.android.lockpattern.Alp.TAG;
 import static haibison.android.lockpattern.BuildConfig.DEBUG;
 
 /**
@@ -34,11 +35,8 @@ import static haibison.android.lockpattern.BuildConfig.DEBUG;
  */
 public class UI {
 
-    /**
-     * This is singleton class.
-     */
-    private UI() {
-    }//UI()
+    // Singleton class
+    private UI() {}
 
     private static final String CLASSNAME = UI.class.getName();
 
@@ -136,7 +134,7 @@ public class UI {
      * @param dialogWindow the window <i>of the dialog</i>.
      */
     public static void adjustDialogSizeForLargeScreens(@NonNull Window dialogWindow) {
-        if (DEBUG) Log.d(CLASSNAME, "adjustDialogSizeForLargeScreens()");
+        if (DEBUG) Log.d(TAG, CLASSNAME + "#adjustDialogSizeForLargeScreens(Window)");
 
         if ( ! dialogWindow.isFloating()) return;
 
@@ -154,12 +152,12 @@ public class UI {
 
         int width = metrics.widthPixels;// dialogWindow.getDecorView().getWidth();
         int height = metrics.heightPixels;// dialogWindow.getDecorView().getHeight();
-        if (DEBUG) Log.d(CLASSNAME, String.format("width = %,d | height = %,d", width, height));
+        if (DEBUG) Log.d(TAG, String.format("width = %,d | height = %,d", width, height));
 
         width = (int) (width * (isPortrait ? screenSize.fixedWidthMinor : screenSize.fixedWidthMajor));
         height = (int) (height * (isPortrait ? screenSize.fixedHeightMajor : screenSize.fixedHeightMinor));
 
-        if (DEBUG) Log.d(CLASSNAME, String.format("NEW >>> width = %,d | height = %,d", width, height));
+        if (DEBUG) Log.d(TAG, String.format("NEW >>> width = %,d | height = %,d", width, height));
         dialogWindow.setLayout(width, height);
     }// adjustDialogSizeForLargeScreens()
 
