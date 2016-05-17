@@ -16,6 +16,11 @@
 
 package haibison.android.lockpattern;
 
+import haibison.android.underdogs.NonNull;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * Some constants about the library.
  *
@@ -29,23 +34,33 @@ public final class Alp {
     /**
      * The library name.
      */
+    @NonNull
     public static final String LIB_NAME = "android-lockpattern";
 
     /**
      * The library version name.
      */
+    @NonNull
     public static final String LIB_VERSION_NAME = "9.0.0";
+
+    /**
+     * Release date.
+     */
+    @NonNull
+    public static final Calendar RELEASE_DATE = new GregorianCalendar(2016, Calendar.MAY, 7);
 
     /**
      * This unique ID is used for some stuffs such as preferences' file name.
      *
      * @since v2.6 beta
      */
+    @NonNull
     public static final String UID = "a6eedbe5-1cf9-4684-8134-ad4ec9f6a131";
 
     /**
-     * Tag of this library, which can be used for logging...
+     * Tag, which can be used for logging...
      */
+    @NonNull
     public static final String TAG = "ALP_42447968";
 
 }
