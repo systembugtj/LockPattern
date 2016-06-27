@@ -1,10 +1,11 @@
 # android-lockpattern
 
-* Version: [`9.0.0`](version-info.md) _(May 7th, 2016)_
-* License: [Apache License v2.0](LICENSE)
-* Project page: <https://bitbucket.org/haibison/android-lockpattern>
-* Demo: <https://play.google.com/store/apps/details?id=group.pals.android.lib.ui.lockpattern.demo>
-* For developers: [Wiki], [API documentation].
+- Version: [`9.0.0`](version-info.md) _(May 7th, 2016)_
+    + _Starting from `8.0.0`, the library uses [Semantic Versioning 2.0.0]_
+- License: [Apache License v2.0](LICENSE)
+- Project page: <https://bitbucket.org/haibison/android-lockpattern>
+- Demo: <https://play.google.com/store/apps/details?id=group.pals.android.lib.ui.lockpattern.demo>
+- For developers: [Wiki], [API documentation].
 
 ---
 
@@ -303,6 +304,7 @@ _For newer versions, please check file [`version-info.md`](version-info.md)._
     + create pattern;
     + compare to existing pattern;
 
+[Semantic Versioning 2.0.0]: http://semver.org/spec/v2.0.0.html
 [Wiki]: https://bitbucket.org/haibison/android-lockpattern/wiki/
 [FAQs]: https://bitbucket.org/haibison/android-lockpattern/wiki/FAQs
 [API documentation]: http://haibison.bitbucket.org/apidocs/android-lockpattern
