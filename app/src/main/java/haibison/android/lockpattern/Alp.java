@@ -61,6 +61,6 @@ public final class Alp {
      * Tag, which can be used for logging...
      */
     @NonNull
-    public static final String TAG = "ALP_42447968";
+    public static final String TAG = "ALP_42447968_" + LIB_VERSION_NAME;
 
 }
