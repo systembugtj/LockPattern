@@ -39,3 +39,17 @@ dependencies {
 
     compile 'haibison.android:underdogs:+'
 }
+
+///////////
+// MAVEN //
+///////////
+
+apply plugin: 'maven'
+
+uploadArchives { repositories { mavenDeployer {
+    repository(url: "file:../../haibison.bitbucket.org/master/maven-repos/")
+
+    pom.groupId    = 'haibison.android'
+    pom.artifactId = 'lockpattern'
+    pom.version    = '10.0.0'
+}}}
