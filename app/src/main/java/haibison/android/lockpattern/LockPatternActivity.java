@@ -86,14 +86,17 @@ import static haibison.android.lockpattern.utils.AlpSettings.Security.METADATA_E
  * <h1>NOTES</h1>
  * <p>
  * <ul>
- * <li> You must use one of built-in actions when calling this activity. They start with {@code ACTION_*}. Otherwise un
- * {@link UnsupportedOperationException} will be thrown.</li>
- * <li>You must use one of the themes that this library supports. They start with {@code R.style.Alp_42447968_Theme_*}. The reason is the themes
- * contain resources that the library needs.</li>
- * <li>With {@link #ACTION_COMPARE_PATTERN}, there are <strong><em>4 possible result codes</em></strong>: {@link #RESULT_OK}, {@link
- * #RESULT_CANCELED}, {@link #RESULT_FAILED} and {@link #RESULT_FORGOT_PATTERN}.</li>
- * <li>With {@link #ACTION_VERIFY_CAPTCHA}, there are <strong><em>3 possible result codes</em></strong>: {@link #RESULT_OK}, {@link
- * #RESULT_CANCELED}, and {@link #RESULT_FAILED}.</li>
+ *     <li>You must use one of built-in actions when calling this activity. They start with {@code ACTION_*}. Otherwise un {@link
+ *     UnsupportedOperationException} will be thrown.</li>
+ *
+ *     <li>You must use one of themes that this library supports. They start with {@code R.style.Alp_42447968_Theme_*}. The reason is themes
+ *     contain resources that the library needs.</li>
+ *
+ *     <li>With {@link #ACTION_COMPARE_PATTERN}, there are <strong><em>4 possible result codes</em></strong>: {@link #RESULT_OK}, {@link
+ *     #RESULT_CANCELED}, {@link #RESULT_FAILED} and {@link #RESULT_FORGOT_PATTERN}.</li>
+ *
+ *     <li>With {@link #ACTION_VERIFY_CAPTCHA}, there are <strong><em>3 possible result codes</em></strong>: {@link #RESULT_OK}, {@link
+ *     #RESULT_CANCELED}, and {@link #RESULT_FAILED}.</li>
  * </ul>
  *
  * @author Hai Bison
@@ -469,10 +472,8 @@ public class LockPatternActivity extends Activity {
          */
         @NonNull
         public <T extends IntentBuilder> T setTheme(@StyleRes int resTheme) {
-            if (resTheme != 0)
-                intent.putExtra(EXTRA_THEME, resTheme);
-            else
-                intent.removeExtra(EXTRA_THEME);
+            if (resTheme != 0) intent.putExtra(EXTRA_THEME, resTheme);
+            else intent.removeExtra(EXTRA_THEME);
 
             return (T) this;
         }//setTheme()
@@ -485,10 +486,8 @@ public class LockPatternActivity extends Activity {
          */
         @NonNull
         public <T extends IntentBuilder> T setPattern(@Nullable char[] pattern) {
-            if (pattern != null)
-                intent.putExtra(EXTRA_PATTERN, pattern);
-            else
-                intent.removeExtra(EXTRA_PATTERN);
+            if (pattern != null) intent.putExtra(EXTRA_PATTERN, pattern);
+            else intent.removeExtra(EXTRA_PATTERN);
 
             return (T) this;
         }//setPattern()
@@ -501,10 +500,8 @@ public class LockPatternActivity extends Activity {
          */
         @NonNull
         public <T extends IntentBuilder> T setResultReceiver(@Nullable ResultReceiver resultReceiver) {
-            if (resultReceiver != null)
-                intent.putExtra(EXTRA_RESULT_RECEIVER, resultReceiver);
-            else
-                intent.removeExtra(EXTRA_RESULT_RECEIVER);
+            if (resultReceiver != null) intent.putExtra(EXTRA_RESULT_RECEIVER, resultReceiver);
+            else intent.removeExtra(EXTRA_RESULT_RECEIVER);
 
             return (T) this;
         }//setResultReceiver()
@@ -517,10 +514,8 @@ public class LockPatternActivity extends Activity {
          */
         @NonNull
         public <T extends IntentBuilder> T setPendingIntentOk(@Nullable PendingIntent pendingIntent) {
-            if (pendingIntent != null)
-                intent.putExtra(EXTRA_PENDING_INTENT_OK, pendingIntent);
-            else
-                intent.removeExtra(EXTRA_PENDING_INTENT_OK);
+            if (pendingIntent != null) intent.putExtra(EXTRA_PENDING_INTENT_OK, pendingIntent);
+            else intent.removeExtra(EXTRA_PENDING_INTENT_OK);
 
             return (T) this;
         }//setPendingIntentOk()
@@ -533,10 +528,8 @@ public class LockPatternActivity extends Activity {
          */
         @NonNull
         public <T extends IntentBuilder> T setPendingIntentCancelled(@Nullable PendingIntent pendingIntent) {
-            if (pendingIntent != null)
-                intent.putExtra(EXTRA_PENDING_INTENT_CANCELLED, pendingIntent);
-            else
-                intent.removeExtra(EXTRA_PENDING_INTENT_CANCELLED);
+            if (pendingIntent != null) intent.putExtra(EXTRA_PENDING_INTENT_CANCELLED, pendingIntent);
+            else intent.removeExtra(EXTRA_PENDING_INTENT_CANCELLED);
 
             return (T) this;
         }//setPendingIntentCancelled()
@@ -549,10 +542,8 @@ public class LockPatternActivity extends Activity {
          */
         @NonNull
         public <T extends IntentBuilder> T setPendingIntentForgotPattern(@Nullable PendingIntent pendingIntent) {
-            if (pendingIntent != null)
-                intent.putExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN, pendingIntent);
-            else
-                intent.removeExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN);
+            if (pendingIntent != null) intent.putExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN, pendingIntent);
+            else intent.removeExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN);
 
             return (T) this;
         }//setPendingIntentForgotPattern()
@@ -614,16 +605,14 @@ public class LockPatternActivity extends Activity {
     /**
      * Helper enum for button OK commands. (Because we use only one "OK" button for different commands).
      */
-    private enum ButtonOkCommand {
-        CONTINUE, FORGOT_PATTERN, DONE
-    }// ButtonOkCommand
+    private enum ButtonOkCommand { CONTINUE, FORGOT_PATTERN, DONE }
 
     /**
      * Delay time to reload the lock pattern view after a wrong pattern.
      */
     private static final long DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW = SECOND_IN_MILLIS;
 
-    private static final String[] SUPPORTED_ACTIONS = {ACTION_CREATE_PATTERN, ACTION_COMPARE_PATTERN, ACTION_VERIFY_CAPTCHA};
+    private static final String[] SUPPORTED_ACTIONS = { ACTION_CREATE_PATTERN, ACTION_COMPARE_PATTERN, ACTION_VERIFY_CAPTCHA };
 
     /////////
     // FIELDS
@@ -650,26 +639,24 @@ public class LockPatternActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         // Check actions
         {
+            final String action = getIntent().getAction();
             boolean found = false;
-            for (final String action : SUPPORTED_ACTIONS) {
-                if (TextUtils.equals(action, getIntent().getAction())) {
-                    found = true;
-                    break;
-                }//if
-            }//for
-            if (!found) throw new UnsupportedOperationException("Unsupported action: " + getIntent().getAction());
+            for (final String s : SUPPORTED_ACTIONS) if (TextUtils.equals(action, s)) {
+                found = true;
+                break;
+            }//if
+            if (found == false) throw new UnsupportedOperationException("Unsupported action: " + action);
         }//check action
 
         // Theme
-        if (getIntent().hasExtra(EXTRA_THEME))
-            setTheme(getIntent().getIntExtra(EXTRA_THEME, R.style.Alp_42447968_Theme_Dark));
+        if (getIntent().hasExtra(EXTRA_THEME)) setTheme(getIntent().getIntExtra(EXTRA_THEME, R.style.Alp_42447968_Theme_Dark));
 
         // Apply theme resources
         final int resThemeResources = ResourceUtils.resolveResourceId(this, R.attr.alp_42447968_theme_resources);
-        if (resThemeResources == 0)
-            throw new RuntimeException("Please provide theme resource via attribute `alp_42447968_theme_resources`."
-                    + " For example: <item name=\"alp_42447968_theme_resources\">@style/Alp_42447968.ThemeResources.Light</item>"
-            );
+        if (resThemeResources == 0) throw new RuntimeException(
+                "Please provide theme resource via attribute `alp_42447968_theme_resources`."
+                        + " For example: <item name=\"alp_42447968_theme_resources\">@style/Alp_42447968.ThemeResources.Light</item>"
+        );
         getTheme().applyStyle(resThemeResources, true);
 
         super.onCreate(savedInstanceState);
@@ -696,7 +683,7 @@ public class LockPatternActivity extends Activity {
         if (DEBUG) Log.d(TAG, CLASSNAME + "#onConfigurationChanged()");
 
         initContentView();
-    }// onConfigurationChanged()
+    }//onConfigurationChanged()
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -707,10 +694,10 @@ public class LockPatternActivity extends Activity {
             finishWithNegativeResult(RESULT_CANCELED);
 
             return true;
-        }// if
+        }//if
 
         return super.onKeyDown(keyCode, event);
-    }// onKeyDown()
+    }//onKeyDown()
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -728,17 +715,17 @@ public class LockPatternActivity extends Activity {
                 finishWithNegativeResult(RESULT_CANCELED);
                 return true;
             }
-        }// if
+        }//if
 
         return super.onTouchEvent(event);
-    }// onTouchEvent()
+    }//onTouchEvent()
 
     @Override
     protected void onDestroy() {
         if (loadingView != null) loadingView.cancel(true);
 
         super.onDestroy();
-    }// onDestroy()
+    }//onDestroy()
 
     /**
      * Loads settings, either from manifest or {@link AlpSettings}.
@@ -754,45 +741,36 @@ public class LockPatternActivity extends Activity {
 
         if (metaData != null && metaData.containsKey(METADATA_MIN_WIRED_DOTS))
             minWiredDots = AlpSettings.Display.validateMinWiredDots(this, metaData.getInt(METADATA_MIN_WIRED_DOTS));
-        else
-            minWiredDots = AlpSettings.Display.getMinWiredDots(this);
+        else minWiredDots = AlpSettings.Display.getMinWiredDots(this);
 
         if (metaData != null && metaData.containsKey(METADATA_MAX_RETRIES))
             maxRetries = AlpSettings.Display.validateMaxRetries(this, metaData.getInt(METADATA_MAX_RETRIES));
-        else
-            maxRetries = AlpSettings.Display.getMaxRetries(this);
+        else maxRetries = AlpSettings.Display.getMaxRetries(this);
 
         if (metaData != null && metaData.containsKey(METADATA_AUTO_SAVE_PATTERN))
             autoSave = metaData.getBoolean(METADATA_AUTO_SAVE_PATTERN);
-        else
-            autoSave = AlpSettings.Security.isAutoSavePattern(this);
+        else autoSave = AlpSettings.Security.isAutoSavePattern(this);
 
         if (metaData != null && metaData.containsKey(METADATA_CAPTCHA_WIRED_DOTS))
             captchaWiredDots = AlpSettings.Display.validateCaptchaWiredDots(this, metaData.getInt(METADATA_CAPTCHA_WIRED_DOTS));
-        else
-            captchaWiredDots = AlpSettings.Display.getCaptchaWiredDots(this);
+        else captchaWiredDots = AlpSettings.Display.getCaptchaWiredDots(this);
 
-        if (metaData != null && metaData.containsKey(METADATA_STEALTH_MODE))
-            stealthMode = metaData.getBoolean(METADATA_STEALTH_MODE);
-        else
-            stealthMode = AlpSettings.Display.isStealthMode(this);
+        if (metaData != null && metaData.containsKey(METADATA_STEALTH_MODE)) stealthMode = metaData.getBoolean(METADATA_STEALTH_MODE);
+        else stealthMode = AlpSettings.Display.isStealthMode(this);
 
         // Encrypter
         final char[] encrypterClass;
         if (metaData != null && metaData.containsKey(METADATA_ENCRYPTER_CLASS))
             encrypterClass = metaData.getString(METADATA_ENCRYPTER_CLASS).toCharArray();
-        else
-            encrypterClass = AlpSettings.Security.getEncrypterClass(this);
+        else encrypterClass = AlpSettings.Security.getEncrypterClass(this);
 
-        if (encrypterClass != null) {
-            try {
-                encrypter = (Encrypter) Class.forName(new String(encrypterClass), false, getClassLoader()).newInstance();
-            } catch (Throwable t) {
-                t.printStackTrace();
-                throw new InvalidEncrypterException();
-            }
+        if (encrypterClass != null) try {
+            encrypter = (Encrypter) Class.forName(new String(encrypterClass), false, getClassLoader()).newInstance();
+        } catch (Throwable t) {
+            Log.e(TAG, t.getMessage(), t);
+            throw new InvalidEncrypterException();
         }
-    }// loadSettings()
+    }//loadSettings()
 
     /**
      * Initializes UI...
@@ -834,7 +812,7 @@ public class LockPatternActivity extends Activity {
             mLockPatternView.setLayoutParams(lp);
 
             break;
-        }// LARGE / XLARGE
+        }//LARGE / XLARGE
         }
 
         // Haptic feedback
@@ -845,7 +823,7 @@ public class LockPatternActivity extends Activity {
             hapticFeedbackEnabled = Settings.System.getInt(getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0;
         } catch (Throwable t) {
             // Ignore it
-            t.printStackTrace();
+            Log.e(TAG, t.getMessage(), t);
         }
         mLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
 
@@ -863,51 +841,39 @@ public class LockPatternActivity extends Activity {
             mBtnCancel.setVisibility(View.VISIBLE);
             mFooter.setVisibility(View.VISIBLE);
 
-            if (infoText != null)
-                mTextInfo.setText(infoText);
-            else
-                mTextInfo.setText(R.string.alp_42447968_msg_draw_an_unlock_pattern);
+            if (infoText != null) mTextInfo.setText(infoText);
+            else mTextInfo.setText(R.string.alp_42447968_msg_draw_an_unlock_pattern);
 
             // BUTTON OK
             if (btnOkCmd == null) btnOkCmd = ButtonOkCommand.CONTINUE;
             switch (btnOkCmd) {
-            case CONTINUE:
-                mBtnConfirm.setText(R.string.alp_42447968_cmd_continue);
-                break;
-            case DONE:
-                mBtnConfirm.setText(R.string.alp_42447968_cmd_confirm);
-                break;
-            default:
-                // Do nothing
-                break;
+            case CONTINUE: mBtnConfirm.setText(R.string.alp_42447968_cmd_continue); break;
+            case DONE: mBtnConfirm.setText(R.string.alp_42447968_cmd_confirm); break;
+            default: break;// Do nothing
             }
             if (btnOkEnabled != null) mBtnConfirm.setEnabled(btnOkEnabled);
-        }// ACTION_CREATE_PATTERN
+        }//ACTION_CREATE_PATTERN
         else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
-            if (TextUtils.isEmpty(infoText))
-                mTextInfo.setText(R.string.alp_42447968_msg_draw_pattern_to_unlock);
-            else
-                mTextInfo.setText(infoText);
+            if (TextUtils.isEmpty(infoText)) mTextInfo.setText(R.string.alp_42447968_msg_draw_pattern_to_unlock);
+            else mTextInfo.setText(infoText);
             if (getIntent().hasExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN)) {
                 mBtnConfirm.setOnClickListener(mBtnConfirmOnClickListener);
                 mBtnConfirm.setText(R.string.alp_42447968_cmd_forgot_pattern);
                 mBtnConfirm.setEnabled(true);
                 mFooter.setVisibility(View.VISIBLE);
-            }
-        }// ACTION_COMPARE_PATTERN
+            }//if
+        }//ACTION_COMPARE_PATTERN
         else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
             mTextInfo.setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
 
             // NOTE: EXTRA_PATTERN should hold a char[] array. In this case we use it as a temporary variable to hold a list of Cell.
             final ArrayList<Cell> pattern;
-            if (getIntent().hasExtra(EXTRA_PATTERN))
-                pattern = getIntent().getParcelableArrayListExtra(EXTRA_PATTERN);
-            else
-                getIntent().putParcelableArrayListExtra(EXTRA_PATTERN, pattern = LockPatternUtils.genCaptchaPattern(captchaWiredDots));
+            if (getIntent().hasExtra(EXTRA_PATTERN)) pattern = getIntent().getParcelableArrayListExtra(EXTRA_PATTERN);
+            else getIntent().putParcelableArrayListExtra(EXTRA_PATTERN, pattern = LockPatternUtils.genCaptchaPattern(captchaWiredDots));
 
             mLockPatternView.setPattern(DisplayMode.Animate, pattern);
-        }// ACTION_VERIFY_CAPTCHA
-    }// initContentView()
+        }//ACTION_VERIFY_CAPTCHA
+    }//initContentView()
 
     /**
      * Compares {@code pattern} to the given pattern ( {@link #ACTION_COMPARE_PATTERN}) or to the generated "CAPTCHA" pattern ({@link
@@ -925,46 +891,40 @@ public class LockPatternActivity extends Activity {
             protected Object doInBackground(Void... params) {
                 if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                     char[] currentPattern = getIntent().getCharArrayExtra(EXTRA_PATTERN);
-                    if (currentPattern == null)
-                        currentPattern = AlpSettings.Security.getPattern(LockPatternActivity.this);
-                    if (currentPattern != null) {
-                        if (encrypter != null)
-                            return pattern.equals(encrypter.decrypt(LockPatternActivity.this, currentPattern));
-                        else
-                            return Arrays.equals(currentPattern, LockPatternUtils.patternToSha1(pattern).toCharArray());
-                    }
-                }// ACTION_COMPARE_PATTERN
+                    if (currentPattern == null) currentPattern = AlpSettings.Security.getPattern(LockPatternActivity.this);
+                    if (currentPattern != null) if (encrypter != null)
+                        return pattern.equals(encrypter.decrypt(LockPatternActivity.this, currentPattern));
+                    else return Arrays.equals(currentPattern, LockPatternUtils.patternToSha1(pattern).toCharArray());
+                }//ACTION_COMPARE_PATTERN
                 else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
                     return pattern.equals(getIntent().getParcelableArrayListExtra(EXTRA_PATTERN));
-                }// ACTION_VERIFY_CAPTCHA
+                }//ACTION_VERIFY_CAPTCHA
 
                 return false;
-            }// doInBackground()
+            }//doInBackground()
 
             @Override
             protected void onPostExecute(Object result) {
                 super.onPostExecute(result);
 
-                if ((Boolean) result)
-                    finishWithResultOk(null);
+                if ((Boolean) result) finishWithResultOk(null);
                 else {
                     retryCount++;
                     intentResult.putExtra(EXTRA_RETRY_COUNT, retryCount);
 
-                    if (retryCount >= maxRetries)
-                        finishWithNegativeResult(RESULT_FAILED);
+                    if (retryCount >= maxRetries) finishWithNegativeResult(RESULT_FAILED);
                     else {
                         mLockPatternView.setDisplayMode(DisplayMode.Wrong);
                         mTextInfo.setText(R.string.alp_42447968_msg_try_again);
                         mLockPatternView.postDelayed(mLockPatternViewReloader, DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
                     }
                 }
-            }// onPostExecute()
+            }//onPostExecute()
 
         };
 
         loadingView.execute();
-    }// doComparePattern()
+    }//doComparePattern()
 
     /**
      * Checks and creates the pattern.
@@ -976,8 +936,9 @@ public class LockPatternActivity extends Activity {
             mLockPatternView.setDisplayMode(DisplayMode.Wrong);
             mTextInfo.setText(getResources().getQuantityString(R.plurals.alp_42447968_pmsg_connect_x_dots, minWiredDots, minWiredDots));
             mLockPatternView.postDelayed(mLockPatternViewReloader, DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
+
             return;
-        }// if
+        }//if
 
         if (getIntent().hasExtra(EXTRA_PATTERN)) {
             // Use a LoadingView because decrypting pattern might take time...
@@ -985,14 +946,12 @@ public class LockPatternActivity extends Activity {
 
                 @Override
                 protected Object doInBackground(Void... params) {
-                    if (encrypter != null)
-                        return pattern.equals(encrypter.decrypt(LockPatternActivity.this, getIntent().getCharArrayExtra(EXTRA_PATTERN)));
-                    else
-                        return Arrays.equals(
-                                getIntent().getCharArrayExtra(EXTRA_PATTERN),
-                                LockPatternUtils.patternToSha1(pattern).toCharArray()
-                        );
-                }// doInBackground()
+                    if (encrypter != null) return pattern.equals(
+                            encrypter.decrypt(LockPatternActivity.this, getIntent().getCharArrayExtra(EXTRA_PATTERN))
+                    ); else return Arrays.equals(
+                            getIntent().getCharArrayExtra(EXTRA_PATTERN), LockPatternUtils.patternToSha1(pattern).toCharArray()
+                    );
+                }//doInBackground()
 
                 @Override
                 protected void onPostExecute(Object result) {
@@ -1007,7 +966,7 @@ public class LockPatternActivity extends Activity {
                         mLockPatternView.setDisplayMode(DisplayMode.Wrong);
                         mLockPatternView.postDelayed(mLockPatternViewReloader, DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
                     }
-                }// onPostExecute()
+                }//onPostExecute()
 
             };
 
@@ -1019,9 +978,8 @@ public class LockPatternActivity extends Activity {
                 @Override
                 protected Object doInBackground(Void... params) {
                     return encrypter != null ?
-                            encrypter.encrypt(LockPatternActivity.this, pattern) :
-                            LockPatternUtils.patternToSha1(pattern).toCharArray();
-                }// onCancel()
+                            encrypter.encrypt(LockPatternActivity.this, pattern) : LockPatternUtils.patternToSha1(pattern).toCharArray();
+                }//onCancel()
 
                 @Override
                 protected void onPostExecute(Object result) {
@@ -1030,13 +988,13 @@ public class LockPatternActivity extends Activity {
                     getIntent().putExtra(EXTRA_PATTERN, (char[]) result);
                     mTextInfo.setText(R.string.alp_42447968_msg_pattern_recorded);
                     mBtnConfirm.setEnabled(true);
-                }// onPostExecute()
+                }//onPostExecute()
 
             };
 
             loadingView.execute();
         }
-    }// doCheckAndCreatePattern()
+    }//doCheckAndCreatePattern()
 
     /**
      * Finishes activity with {@link Activity#RESULT_OK}.
@@ -1044,8 +1002,7 @@ public class LockPatternActivity extends Activity {
      * @param pattern the pattern, if this is in mode creating pattern. In any cases, it can be set to {@code null}.
      */
     private void finishWithResultOk(@Nullable char[] pattern) {
-        if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))
-            intentResult.putExtra(EXTRA_PATTERN, pattern);
+        if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) intentResult.putExtra(EXTRA_PATTERN, pattern);
         else {
             // If the user was "logging in", minimum try count can not be zero.
             intentResult.putExtra(EXTRA_RETRY_COUNT, retryCount + 1);
@@ -1054,11 +1011,10 @@ public class LockPatternActivity extends Activity {
         setResult(RESULT_OK, intentResult);
 
         // ResultReceiver
-        ResultReceiver receiver = getIntent().getParcelableExtra(EXTRA_RESULT_RECEIVER);
+        final ResultReceiver receiver = getIntent().getParcelableExtra(EXTRA_RESULT_RECEIVER);
         if (receiver != null) {
-            Bundle bundle = new Bundle();
-            if (ACTION_CREATE_PATTERN.equals(getIntent().getAction()))
-                bundle.putCharArray(EXTRA_PATTERN, pattern);
+            final Bundle bundle = new Bundle();
+            if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) bundle.putCharArray(EXTRA_PATTERN, pattern);
             else {
                 // If the user was "logging in", minimum try count can not be zero.
                 bundle.putInt(EXTRA_RETRY_COUNT, retryCount + 1);
@@ -1067,17 +1023,15 @@ public class LockPatternActivity extends Activity {
         }
 
         // PendingIntent
-        PendingIntent pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_OK);
-        if (pi != null) {
-            try {
-                pi.send(this, RESULT_OK, intentResult);
-            } catch (Throwable t) {
-                Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + pi, t);
-            }
-        }//if
+        final PendingIntent piOk = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_OK);
+        if (piOk != null) try {
+            piOk.send(this, RESULT_OK, intentResult);
+        } catch (Throwable t) {
+            Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + piOk, t);
+        }
 
         finish();
-    }// finishWithResultOk()
+    }//finishWithResultOk()
 
     /**
      * Finishes the activity with negative result ({@link #RESULT_CANCELED}, {@link #RESULT_FAILED} or {@link
@@ -1089,28 +1043,26 @@ public class LockPatternActivity extends Activity {
         setResult(resultCode, intentResult);
 
         // ResultReceiver
-        ResultReceiver receiver = getIntent().getParcelableExtra(EXTRA_RESULT_RECEIVER);
+        final ResultReceiver receiver = getIntent().getParcelableExtra(EXTRA_RESULT_RECEIVER);
         if (receiver != null) {
-            Bundle resultBundle = null;
+            final Bundle resultBundle;
             if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                 resultBundle = new Bundle();
                 resultBundle.putInt(EXTRA_RETRY_COUNT, retryCount);
-            }
+            } else resultBundle = null;
             receiver.send(resultCode, resultBundle);
         }//if
 
         // PendingIntent
-        PendingIntent pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_CANCELLED);
-        if (pi != null) {
-            try {
-                pi.send(this, resultCode, intentResult);
-            } catch (Throwable t) {
-                Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + pi, t);
-            }
-        }//if
+        final PendingIntent piCancelled = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_CANCELLED);
+        if (piCancelled != null) try {
+            piCancelled.send(this, resultCode, intentResult);
+        } catch (Throwable t) {
+            Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + piCancelled, t);
+        }
 
         finish();
-    }// finishWithNegativeResult()
+    }//finishWithNegativeResult()
 
     ////////////
     // LISTENERS
@@ -1130,28 +1082,27 @@ public class LockPatternActivity extends Activity {
                 mTextInfo.setText(R.string.alp_42447968_msg_release_finger_when_done);
                 mBtnConfirm.setEnabled(false);
                 if (btnOkCmd == ButtonOkCommand.CONTINUE) getIntent().removeExtra(EXTRA_PATTERN);
-            }// ACTION_CREATE_PATTERN
+            }//ACTION_CREATE_PATTERN
             else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                 mTextInfo.setText(R.string.alp_42447968_msg_draw_pattern_to_unlock);
-            }// ACTION_COMPARE_PATTERN
+            }//ACTION_COMPARE_PATTERN
             else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
                 mTextInfo.setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
-            }// ACTION_VERIFY_CAPTCHA
-        }// onPatternStart()
+            }//ACTION_VERIFY_CAPTCHA
+        }//onPatternStart()
 
         @Override
         public void onPatternDetected(List<Cell> pattern) {
             if (ACTION_CREATE_PATTERN.equals(getIntent().getAction())) {
                 doCheckAndCreatePattern(pattern);
-            }// ACTION_CREATE_PATTERN
+            }//ACTION_CREATE_PATTERN
             else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                 doComparePattern(pattern);
-            }// ACTION_COMPARE_PATTERN
+            }//ACTION_COMPARE_PATTERN
             else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
-                if (!DisplayMode.Animate.equals(mLockPatternView.getDisplayMode()))
-                    doComparePattern(pattern);
-            }// ACTION_VERIFY_CAPTCHA
-        }// onPatternDetected()
+                if (DisplayMode.Animate.equals(mLockPatternView.getDisplayMode()) == false) doComparePattern(pattern);
+            }//ACTION_VERIFY_CAPTCHA
+        }//onPatternDetected()
 
         @Override
         public void onPatternCleared() {
@@ -1163,26 +1114,25 @@ public class LockPatternActivity extends Activity {
                 if (btnOkCmd == ButtonOkCommand.CONTINUE) {
                     getIntent().removeExtra(EXTRA_PATTERN);
                     mTextInfo.setText(R.string.alp_42447968_msg_draw_an_unlock_pattern);
-                } else
-                    mTextInfo.setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
-            }// ACTION_CREATE_PATTERN
+                } else mTextInfo.setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
+            }//ACTION_CREATE_PATTERN
             else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                 mLockPatternView.setDisplayMode(DisplayMode.Correct);
                 mTextInfo.setText(R.string.alp_42447968_msg_draw_pattern_to_unlock);
-            }// ACTION_COMPARE_PATTERN
+            }//ACTION_COMPARE_PATTERN
             else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
                 mTextInfo.setText(R.string.alp_42447968_msg_redraw_pattern_to_confirm);
                 List<Cell> pattern = getIntent().getParcelableArrayListExtra(EXTRA_PATTERN);
                 mLockPatternView.setPattern(DisplayMode.Animate, pattern);
-            }// ACTION_VERIFY_CAPTCHA
-        }// onPatternCleared()
+            }//ACTION_VERIFY_CAPTCHA
+        }//onPatternCleared()
 
         @Override
         public void onPatternCellAdded(List<Cell> pattern) {
             // Nothing to do
-        }// onPatternCellAdded()
+        }//onPatternCellAdded()
 
-    };// mLockPatternViewListener
+    };//mLockPatternViewListener
 
     /**
      * Click listener for button Cancel.
@@ -1192,9 +1142,9 @@ public class LockPatternActivity extends Activity {
         @Override
         public void onClick(View v) {
             finishWithNegativeResult(RESULT_CANCELED);
-        }// onClick()
+        }//onClick()
 
-    };// mBtnCancelOnClickListener
+    };//mBtnCancelOnClickListener
 
     /**
      * Click listener for button Confirm.
@@ -1215,22 +1165,21 @@ public class LockPatternActivity extends Activity {
                     if (autoSave) AlpSettings.Security.setPattern(LockPatternActivity.this, pattern);
                     finishWithResultOk(pattern);
                 }
-            }// ACTION_CREATE_PATTERN
+            }//ACTION_CREATE_PATTERN
             else if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                 // We don't need to verify the extra. First, this button is only visible if there is this extra in the intent. Second, it is the
                 // responsibility of the caller to make sure the extra is good.
-                PendingIntent pi = null;
+                final PendingIntent pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN);
                 try {
-                    pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN);
                     if (pi != null) pi.send();
                 } catch (Throwable t) {
                     Log.e(TAG, CLASSNAME + " >> Failed sending pending intent: " + pi, t);
                 }
                 finishWithNegativeResult(RESULT_FORGOT_PATTERN);
-            }// ACTION_COMPARE_PATTERN
-        }// onClick()
+            }//ACTION_COMPARE_PATTERN
+        }//onClick()
 
-    };// mBtnConfirmOnClickListener
+    };//mBtnConfirmOnClickListener
 
     /**
      * This reloads the {@link #mLockPatternView} after a wrong pattern.
@@ -1241,9 +1190,9 @@ public class LockPatternActivity extends Activity {
         public void run() {
             mLockPatternView.clearPattern();
             mLockPatternViewListener.onPatternCleared();
-        }// run()
+        }//run()
 
-    };// mLockPatternViewReloader
+    };//mLockPatternViewReloader
 
     /**
      * Click listener for view group progress bar.
@@ -1253,8 +1202,8 @@ public class LockPatternActivity extends Activity {
         @Override
         public void onClick(View v) {
             // Do nothing. We just don't want the user to interact with controls behind this view.
-        }// onClick()
+        }//onClick()
 
-    };// mViewGroupProgressBarOnClickListener
+    };//mViewGroupProgressBarOnClickListener
 
 }

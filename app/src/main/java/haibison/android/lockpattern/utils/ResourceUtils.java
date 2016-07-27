@@ -54,7 +54,7 @@ public class ResourceUtils {
      * @return the resource ID that {@link TypedValue#resourceId} points to, or {@code defaultValue} if not found.
      */
     public static int resolveResourceId(@NonNull Context context, @AttrRes int resAttr, int defaultValue) {
-        TypedValue typedValue = new TypedValue();
+        final TypedValue typedValue = new TypedValue();
         if (context.getTheme().resolveAttribute(resAttr, typedValue, true)) return typedValue.resourceId;
         return defaultValue;
     }//resolveResourceId()

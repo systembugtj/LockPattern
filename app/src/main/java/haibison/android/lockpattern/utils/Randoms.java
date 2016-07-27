@@ -32,11 +32,8 @@ public class Randoms {
 
     private static final Random RANDOM = new Random();
 
-    /**
-     * This is singleton class.
-     */
-    private Randoms() {
-    }// Random()
+    // Singleton class
+    private Randoms() {}
 
     /**
      * Generates a random integer.
@@ -45,7 +42,7 @@ public class Randoms {
      */
     public static int randInt() {
         return RANDOM.nextInt((int) (System.nanoTime() % Integer.MAX_VALUE));
-    }// randInt()
+    }//randInt()
 
     /**
      * Generates a random integer within {@code [0, n)}.
@@ -55,7 +52,7 @@ public class Randoms {
      */
     public static int randInt(int n) {
         return n > 0 ? randInt() % n : 0;
-    }// randInt()
+    }//randInt()
 
     /**
      * Generates a random integer array which has length of {@code end - start}, and is filled by all values from {@code start} to {@code
@@ -77,10 +74,10 @@ public class Randoms {
             int k = randInt(values.size());
             result[i] = values.get(k);
             values.remove(k);
-        }// for
+        }//for
 
         return result;
-    }// randIntArray()
+    }//randIntArray()
 
     /**
      * Generates a random integer array which has length of {@code end}, and is filled by all values from {@code 0} to {@code end - 1} in
@@ -92,6 +89,6 @@ public class Randoms {
     @NonNull
     public static int[] randIntArray(int end) {
         return randIntArray(0, end);
-    }// randIntArray()
+    }//randIntArray()
 
 }

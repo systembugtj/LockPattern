@@ -34,22 +34,19 @@ import static android.text.format.DateUtils.SECOND_IN_MILLIS;
  */
 public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
-    @SuppressWarnings("unused")
-    private static final String CLASSNAME = LoadingView.class.getName();
-
     private final View view;
 
     /**
      * Delay time in milliseconds. Default delay is half a second.
      */
-    private long mDelayTime = SECOND_IN_MILLIS / 2;
+    private long delayTime = SECOND_IN_MILLIS / 2;
 
     /**
-     * Flag to use along with {@link #mDelayTime}
+     * Flag to use along with {@link #delayTime}
      */
-    private boolean mFinished = false;
+    private boolean finished = false;
 
-    private Throwable mLastException;
+    private Throwable lastException;
 
     /**
      * Creates new instance.
@@ -59,7 +56,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      */
     public LoadingView(@NonNull Context context, @NonNull View view) {
         this.view = view;
-    }// LoadingView()
+    }//LoadingView()
 
     /**
      * If you override this method, you must call its super method at beginning of the method.
@@ -71,11 +68,11 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
 
             @Override
             public void run() {
-                if (!mFinished) view.setVisibility(View.VISIBLE);
-            }// run()
+                if (finished == false) view.setVisibility(View.VISIBLE);
+            }//run()
 
         }, getDelayTime());
-    }// onPreExecute()
+    }//onPreExecute()
 
     /**
      * If you override this method, you must call its super method at beginning of the method.
@@ -84,7 +81,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
     @CallSuper
     protected void onPostExecute(Result result) {
         doFinish();
-    }// onPostExecute()
+    }//onPostExecute()
 
     /**
      * If you override this method, you must call its super method at beginning of the method.
@@ -94,12 +91,12 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
     protected void onCancelled() {
         doFinish();
         super.onCancelled();
-    }// onCancelled()
+    }//onCancelled()
 
     private void doFinish() {
-        mFinished = true;
+        finished = true;
         view.setVisibility(View.GONE);
-    }// doFinish()
+    }//doFinish()
 
     /**
      * Gets the delay time before showing the view.
@@ -107,8 +104,8 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      * @return the delay time, in milliseconds.
      */
     public long getDelayTime() {
-        return mDelayTime;
-    }// getDelayTime()
+        return delayTime;
+    }//getDelayTime()
 
     /**
      * Sets the delay time before showing the view.
@@ -117,10 +114,10 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      * @return the instance of this object, for chaining multiple calls into a single statement.
      */
     @NonNull
-    public LoadingView<Params, Progress, Result> setDelayTime(int delayTime) {
-        mDelayTime = delayTime >= 0 ? delayTime : 0;
+    public LoadingView<Params, Progress, Result> setDelayTime(final int delayTime) {
+        this.delayTime = delayTime >= 0 ? delayTime : 0;
         return this;
-    }// setDelayTime()
+    }//setDelayTime()
 
     /**
      * Sets last exception. This method is useful in case an exception raises inside {@link #doInBackground(Object[])}.
@@ -128,8 +125,8 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      * @param t {@link Throwable}
      */
     protected void setLastException(@Nullable Throwable t) {
-        mLastException = t;
-    }// setLastException()
+        lastException = t;
+    }//setLastException()
 
     /**
      * Gets last exception.
@@ -138,7 +135,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      */
     @Nullable
     public Throwable getLastException() {
-        return mLastException;
-    }// getLastException()
+        return lastException;
+    }//getLastException()
 
 }

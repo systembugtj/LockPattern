@@ -42,8 +42,6 @@ public class UI {
 
     /**
      * The screen sizes.
-     *
-     * @author Hai Bison
      */
     public enum ScreenSize {
         /**
@@ -74,26 +72,29 @@ public class UI {
         /**
          * The desired fixed width for a dialog along the minor axis (the screen is in portrait). This is a fraction.
          */
-        public final float fixedWidthMinor,
+        public final float fixedWidthMinor;
+
         /**
          * The desired fixed width for a dialog along the major axis (the screen is in landscape). This is a fraction.
          */
-        fixedWidthMajor,
+        public final float fixedWidthMajor;
+
         /**
          * The desired fixed height for a dialog along the minor axis (the screen is in landscape). This is a fraction.
          */
-        fixedHeightMinor,
+        public final float fixedHeightMinor;
+
         /**
          * The desired fixed height for a dialog along the major axis (the screen is in portrait). This is a fraction.
          */
-        fixedHeightMajor;
+        public final float fixedHeightMajor;
 
         ScreenSize(float fixedHeightMajor, float fixedHeightMinor, float fixedWidthMajor, float fixedWidthMinor) {
             this.fixedHeightMajor = fixedHeightMajor;
             this.fixedHeightMinor = fixedHeightMinor;
             this.fixedWidthMajor = fixedWidthMajor;
             this.fixedWidthMinor = fixedWidthMinor;
-        }// ScreenSize()
+        }//ScreenSize()
 
         /**
          * Gets current screen size.
@@ -104,20 +105,16 @@ public class UI {
         @NonNull
         public static ScreenSize getCurrent(@NonNull Context context) {
             switch (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) {
-            case Configuration.SCREENLAYOUT_SIZE_SMALL:
-                return SMALL;
-            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
-                return NORMAL;
-            case Configuration.SCREENLAYOUT_SIZE_LARGE:
-                return LARGE;
-            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
-                return XLARGE;
-            default:
-                return UNDEFINED;
+            case Configuration.SCREENLAYOUT_SIZE_SMALL: return SMALL;
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL: return NORMAL;
+            case Configuration.SCREENLAYOUT_SIZE_LARGE: return LARGE;
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE: return XLARGE;
             }
-        }// getCurrent()
 
-    }// ScreenSize
+            return UNDEFINED;
+        }//getCurrent()
+
+    }//ScreenSize
 
     /**
      * Uses a fixed size for {@code dialog} in large screens.
@@ -126,7 +123,7 @@ public class UI {
      */
     public static void adjustDialogSizeForLargeScreens(@NonNull Dialog dialog) {
         adjustDialogSizeForLargeScreens(dialog.getWindow());
-    }// adjustDialogSizeForLargeScreens()
+    }//adjustDialogSizeForLargeScreens()
 
     /**
      * Uses a fixed size for {@code dialogWindow} in large screens.
@@ -136,15 +133,12 @@ public class UI {
     public static void adjustDialogSizeForLargeScreens(@NonNull Window dialogWindow) {
         if (DEBUG) Log.d(TAG, CLASSNAME + "#adjustDialogSizeForLargeScreens(Window)");
 
-        if ( ! dialogWindow.isFloating()) return;
+        if (dialogWindow.isFloating() == false) return;
 
         final ScreenSize screenSize = ScreenSize.getCurrent(dialogWindow.getContext());
         switch (screenSize) {
-        case LARGE:
-        case XLARGE:
-            break;
-        default:
-            return;
+        case LARGE: case XLARGE: break;
+        default: return;
         }
 
         final DisplayMetrics metrics = dialogWindow.getContext().getResources().getDisplayMetrics();
@@ -159,6 +153,6 @@ public class UI {
 
         if (DEBUG) Log.d(TAG, String.format("NEW >>> width = %,d | height = %,d", width, height));
         dialogWindow.setLayout(width, height);
-    }// adjustDialogSizeForLargeScreens()
+    }//adjustDialogSizeForLargeScreens()
 
 }
