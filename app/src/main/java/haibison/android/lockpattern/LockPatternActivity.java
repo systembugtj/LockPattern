@@ -641,10 +641,7 @@ public class LockPatternActivity extends Activity {
         {
             final String action = getIntent().getAction();
             boolean found = false;
-            for (final String s : SUPPORTED_ACTIONS) if (TextUtils.equals(action, s)) {
-                found = true;
-                break;
-            }//if
+            for (final String s : SUPPORTED_ACTIONS) if (TextUtils.equals(action, s)) { found = true; break; }
             if (found == false) throw new UnsupportedOperationException("Unsupported action: " + action);
         }//check action
 
@@ -736,7 +733,7 @@ public class LockPatternActivity extends Activity {
             metaData = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA).metaData;
         } catch (NameNotFoundException e) {
             // Never catch this
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage(), e);
         }
 
         if (metaData != null && metaData.containsKey(METADATA_MIN_WIRED_DOTS))
