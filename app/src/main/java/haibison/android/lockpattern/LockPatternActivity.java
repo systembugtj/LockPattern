@@ -58,9 +58,11 @@ import haibison.android.lockpattern.widget.LockPatternView;
 import haibison.android.lockpattern.widget.LockPatternView.Cell;
 import haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
 import haibison.android.underdogs.Api;
+import haibison.android.underdogs.Authors;
 import haibison.android.underdogs.LayoutRes;
 import haibison.android.underdogs.NonNull;
 import haibison.android.underdogs.Nullable;
+import haibison.android.underdogs.Param;
 import haibison.android.underdogs.Permissions;
 import haibison.android.underdogs.StringRes;
 import haibison.android.underdogs.StyleRes;
@@ -176,6 +178,7 @@ public class LockPatternActivity extends Activity {
      * For actions {@link #ACTION_COMPARE_PATTERN} and {@link #ACTION_VERIFY_CAPTCHA}, this key holds the number of tries that the user
      * attempted to verify the input pattern.
      */
+    @Param(type = Param.Type.OUTPUT, dataTypes = int.class)
     public static final String EXTRA_RETRY_COUNT = CLASSNAME + ".RETRY_COUNT";
 
     /**
@@ -185,19 +188,21 @@ public class LockPatternActivity extends Activity {
      *
      * @since v1.5.3 beta
      */
+    @Param(type = Param.Type.INPUT, dataTypes = int.class)
     public static final String EXTRA_THEME = CLASSNAME + ".THEME";
 
     /**
-     * Key to hold the pattern. It must be a {@code char[]} array.
-     * <p>
+     * Key to hold the pattern.
      * <ul>
-     * <li>If you use encrypter, it should be an encrypted array.</li>
-     * <li>If you don't use encrypter, it should be the SHA-1 value of the actual pattern. You can generate the value by {@link
-     * LockPatternUtils#patternToSha1(List)}.</li>
+     *     <li>If you use encrypter, it should be an encrypted array.</li>
+     *
+     *     <li>If you don't use encrypter, it should be the SHA-1 value of the actual pattern. You can generate the value by {@link
+     *     LockPatternUtils#patternToSha1(List)}.</li>
      * </ul>
      *
      * @since v2 beta
      */
+    @Param(type = Param.Type.IN_OUT, dataTypes = char[].class)
     public static final String EXTRA_PATTERN = CLASSNAME + ".PATTERN";
 
     /**
@@ -206,6 +211,7 @@ public class LockPatternActivity extends Activity {
      *
      * @since v2.4 beta
      */
+    @Param(type = Param.Type.INPUT, dataTypes = ResultReceiver.class)
     public static final String EXTRA_RESULT_RECEIVER = CLASSNAME + ".RESULT_RECEIVER";
 
     /**
@@ -215,10 +221,11 @@ public class LockPatternActivity extends Activity {
      * <h1>Notes</h1>
      * <p>
      * <ul>
-     * <li>If you're going to use an activity, you don't need {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library will call
-     * it inside {@link LockPatternActivity} .</li>
+     *     <li>If you're going to use an activity, you don't need {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library will
+     *     call it inside {@link LockPatternActivity} .</li>
      * </ul>
      */
+    @Param(type = Param.Type.INPUT, dataTypes = PendingIntent.class)
     public static final String EXTRA_PENDING_INTENT_OK = CLASSNAME + ".PENDING_INTENT_OK";
 
     /**
@@ -227,10 +234,11 @@ public class LockPatternActivity extends Activity {
      * <h1>Notes</h1>
      * <p>
      * <ul>
-     * <li>If you're going to use an activity, you don't need {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library will call
-     * it inside {@link LockPatternActivity} .</li>
+     *     <li>If you're going to use an activity, you don't need {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library will
+     *     call it inside {@link LockPatternActivity} .</li>
      * </ul>
      */
+    @Param(type = Param.Type.INPUT, dataTypes = PendingIntent.class)
     public static final String EXTRA_PENDING_INTENT_CANCELLED = CLASSNAME + ".PENDING_INTENT_CANCELLED";
 
     /**
@@ -240,24 +248,26 @@ public class LockPatternActivity extends Activity {
      * <h1>Notes</h1>
      * <p>
      * <ul>
-     * <li>If you use an activity, you don't need {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library will call it inside
-     * {@link LockPatternActivity}.</li>
-     * <li>{@link LockPatternActivity} will finish with {@link #RESULT_FORGOT_PATTERN} <em><strong>after</strong> making a call</em> to start
-     * your pending intent.</li>
-     * <li>It is your responsibility to make sure the intent is good. The library doesn't cover any errors when calling your intent.</li>
+     *     <li>If you use an activity, you don't need {@link Intent#FLAG_ACTIVITY_NEW_TASK} for the intent, since the library will call it
+     *     inside {@link LockPatternActivity}.</li>
+     *
+     *     <li>{@link LockPatternActivity} will finish with {@link #RESULT_FORGOT_PATTERN} <em><strong>after</strong> making a call</em> to
+     *     start your pending intent.</li>
+     *
+     *     <li>It is your responsibility to make sure the intent is good. The library doesn't cover any errors when calling your intent.</li>
      * </ul>
      *
-     * @author Thanks to Yan Cheng Cheok for his idea.
      * @see #ACTION_COMPARE_PATTERN
      * @since v2.8 beta
      */
+    @Authors(names = "Yan Cheng Cheok")
+    @Param(type = Param.Type.INPUT, dataTypes = PendingIntent.class)
     public static final String EXTRA_PENDING_INTENT_FORGOT_PATTERN = CLASSNAME + ".PENDING_INTENT_FORGOT_PATTERN";
 
     /**
      * Use this extra to provide title for the activity.
-     * <p>
-     * Type: {@code int} (for a string resource ID), or {@link CharSequence}.
      */
+    @Param(type = Param.Type.INPUT, dataTypes = { int.class, CharSequence.class })
     public static final String EXTRA_TITLE = CLASSNAME + ".TITLE";
 
     /**
@@ -275,10 +285,9 @@ public class LockPatternActivity extends Activity {
      * <p>
      * <strong>Note:</strong> please have a look at {@code layout/alp_42447968_lock_pattern_activity} and
      * {@code layout/alp_42447968_lock_pattern_activity_land}. In your layouts, you have to provide same components with same IDs.
-     * <p>
-     * Type: {@code int}.
      */
     @LayoutRes
+    @Param(type = Param.Type.INPUT, dataTypes = int.class)
     public static final String EXTRA_LAYOUT = CLASSNAME + ".LAYOUT";
 
     /**
