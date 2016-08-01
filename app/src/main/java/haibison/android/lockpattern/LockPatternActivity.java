@@ -738,12 +738,8 @@ public class LockPatternActivity extends Activity {
      */
     private void loadSettings() {
         Bundle metaData = null;
-        try {
-            metaData = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA).metaData;
-        } catch (NameNotFoundException e) {
-            // Never catch this
-            Log.e(TAG, e.getMessage(), e);
-        }
+        try { metaData = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA).metaData; }
+        catch (NameNotFoundException e) { Log.e(TAG, e.getMessage(), e); }// Should never catch this
 
         if (metaData != null && metaData.containsKey(METADATA_MIN_WIRED_DOTS))
             minWiredDots = AlpSettings.Display.validateMinWiredDots(this, metaData.getInt(METADATA_MIN_WIRED_DOTS));
@@ -827,10 +823,7 @@ public class LockPatternActivity extends Activity {
             // This call requires permission WRITE_SETTINGS. Since it's not necessary, we don't need to declare that permission in manifest.
             // Don't scare our users  :-D
             hapticFeedbackEnabled = Settings.System.getInt(getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0;
-        } catch (Throwable t) {
-            // Ignore it
-            Log.e(TAG, t.getMessage(), t);
-        }
+        } catch (Throwable t) { Log.e(TAG, t.getMessage(), t); }// Ignore it
         mLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
 
         mLockPatternView.setInStealthMode(stealthMode && !ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction()));
@@ -898,9 +891,9 @@ public class LockPatternActivity extends Activity {
                 if (ACTION_COMPARE_PATTERN.equals(getIntent().getAction())) {
                     char[] currentPattern = getIntent().getCharArrayExtra(EXTRA_PATTERN);
                     if (currentPattern == null) currentPattern = AlpSettings.Security.getPattern(LockPatternActivity.this);
-                    if (currentPattern != null) if (encrypter != null)
-                        return pattern.equals(encrypter.decrypt(LockPatternActivity.this, currentPattern));
-                    else return Arrays.equals(currentPattern, LockPatternUtils.patternToSha1(pattern).toCharArray());
+                    if (currentPattern != null)
+                        if (encrypter != null) return pattern.equals(encrypter.decrypt(LockPatternActivity.this, currentPattern));
+                        else return Arrays.equals(currentPattern, LockPatternUtils.patternToSha1(pattern).toCharArray());
                 }//ACTION_COMPARE_PATTERN
                 else if (ACTION_VERIFY_CAPTCHA.equals(getIntent().getAction())) {
                     return pattern.equals(getIntent().getParcelableArrayListExtra(EXTRA_PATTERN));
@@ -954,7 +947,8 @@ public class LockPatternActivity extends Activity {
                 protected Object doInBackground(Void... params) {
                     if (encrypter != null) return pattern.equals(
                             encrypter.decrypt(LockPatternActivity.this, getIntent().getCharArrayExtra(EXTRA_PATTERN))
-                    ); else return Arrays.equals(
+                    );
+                    return Arrays.equals(
                             getIntent().getCharArrayExtra(EXTRA_PATTERN), LockPatternUtils.patternToSha1(pattern).toCharArray()
                     );
                 }//doInBackground()
@@ -1030,11 +1024,8 @@ public class LockPatternActivity extends Activity {
 
         // PendingIntent
         final PendingIntent piOk = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_OK);
-        if (piOk != null) try {
-            piOk.send(this, RESULT_OK, intentResult);
-        } catch (Throwable t) {
-            Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + piOk, t);
-        }
+        if (piOk != null) try { piOk.send(this, RESULT_OK, intentResult); }
+        catch (Throwable t) { Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + piOk, t); }
 
         finish();
     }//finishWithResultOk()
@@ -1061,11 +1052,8 @@ public class LockPatternActivity extends Activity {
 
         // PendingIntent
         final PendingIntent piCancelled = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_CANCELLED);
-        if (piCancelled != null) try {
-            piCancelled.send(this, resultCode, intentResult);
-        } catch (Throwable t) {
-            Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + piCancelled, t);
-        }
+        if (piCancelled != null) try { piCancelled.send(this, resultCode, intentResult); }
+        catch (Throwable t) { Log.e(TAG, CLASSNAME + " >> Failed sending PendingIntent: " + piCancelled, t); }
 
         finish();
     }//finishWithNegativeResult()
@@ -1134,9 +1122,7 @@ public class LockPatternActivity extends Activity {
         }//onPatternCleared()
 
         @Override
-        public void onPatternCellAdded(List<Cell> pattern) {
-            // Nothing to do
-        }//onPatternCellAdded()
+        public void onPatternCellAdded(List<Cell> pattern) {}
 
     };//mLockPatternViewListener
 
@@ -1176,11 +1162,9 @@ public class LockPatternActivity extends Activity {
                 // We don't need to verify the extra. First, this button is only visible if there is this extra in the intent. Second, it is the
                 // responsibility of the caller to make sure the extra is good.
                 final PendingIntent pi = getIntent().getParcelableExtra(EXTRA_PENDING_INTENT_FORGOT_PATTERN);
-                try {
-                    if (pi != null) pi.send();
-                } catch (Throwable t) {
-                    Log.e(TAG, CLASSNAME + " >> Failed sending pending intent: " + pi, t);
-                }
+                try { if (pi != null) pi.send(); }
+                catch (Throwable t) { Log.e(TAG, CLASSNAME + " >> Failed sending pending intent: " + pi, t); }
+
                 finishWithNegativeResult(RESULT_FORGOT_PATTERN);
             }//ACTION_COMPARE_PATTERN
         }//onClick()
