@@ -29,10 +29,10 @@ import haibison.android.underdogs.NonNull;
  *
  * @author Hai Bison
  */
-public class ResourceUtils {
+public class ResUtils {
 
     // Singleton class
-    private ResourceUtils() {}
+    private ResUtils() {}
 
     /**
      * Convenient method for {@link Context#getTheme()} and {@link Theme#resolveAttribute(int, TypedValue, boolean)}.

@@ -45,7 +45,7 @@ import java.util.List;
 
 import haibison.android.lockpattern.R;
 import haibison.android.lockpattern.utils.FloatAnimator;
-import haibison.android.lockpattern.utils.ResourceUtils;
+import haibison.android.lockpattern.utils.ResUtils;
 
 /**
  * Displays and detects the user's unlock attempt, which is a drag of a finger across 9 regions of the screen.
@@ -357,13 +357,13 @@ public class LockPatternView extends View {
         mPathPaint.setDither(true);
 
         mRegularColor = context.getResources().getColor(
-                ResourceUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_regular)
+                ResUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_regular)
         );
         mErrorColor = context.getResources().getColor(
-                ResourceUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_error)
+                ResUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_error)
         );
         mSuccessColor = context.getResources().getColor(
-                ResourceUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_success)
+                ResUtils.resolveResourceId(context, R.attr.alp_42447968_color_lock_pattern_view_success)
         );
 
         mRegularColor = a.getColor(R.styleable.Alp_42447968_LockPatternView_alp_42447968_regularColor, mRegularColor);
