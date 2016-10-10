@@ -16,10 +16,10 @@
 
 package haibison.android.lockpattern;
 
-import haibison.android.underdogs.NonNull;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import haibison.android.underdogs.NonNull;
 
 /**
  * Some constants about the library.

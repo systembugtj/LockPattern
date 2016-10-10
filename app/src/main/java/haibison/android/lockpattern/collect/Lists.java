@@ -16,10 +16,10 @@
 
 package haibison.android.lockpattern.collect;
 
-import haibison.android.underdogs.NonNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
+
+import haibison.android.underdogs.NonNull;
 
 /**
  * Provides static methods for creating {@code List} instances easily, and other utility methods for working with
