@@ -1,6 +1,6 @@
 # android-lockpattern
 
-- Version: [`10.0.0`](version-info.md) _(July 25th, 2016)_
+- Version: [`11.0.0`](version-info.md) _(October 21st, 2016)_
     + _Starting from `8.0.0`, the library uses [Semantic Versioning 2.0.0]_
 - License: [Apache License v2.0](LICENSE)
 - Project page: <https://bitbucket.org/haibison/android-lockpattern>

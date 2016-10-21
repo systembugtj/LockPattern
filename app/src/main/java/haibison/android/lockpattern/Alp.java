@@ -39,13 +39,13 @@ public final class Alp {
      * The library version name.
      */
     @NonNull
-    public static final String LIB_VERSION_NAME = "10.0.0";
+    public static final String LIB_VERSION_NAME = "11.0.0";
 
     /**
      * Release date.
      */
     @NonNull
-    public static final Calendar RELEASE_DATE = new GregorianCalendar(2016, Calendar.JULY, 25);
+    public static final Calendar RELEASE_DATE = new GregorianCalendar(2016, Calendar.OCTOBER, 21);
 
     /**
      * This unique ID is used for some stuffs such as preferences' file name.
