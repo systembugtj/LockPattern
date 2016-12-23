@@ -52,5 +52,5 @@ uploadArchives { repositories { mavenDeployer {
 
     pom.groupId    = 'haibison.android'
     pom.artifactId = 'lockpattern'
-    pom.version    = '11.0.0'
+    pom.version    = '12.0.0'
 }}}

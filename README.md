@@ -1,6 +1,6 @@
 # android-lockpattern
 
-- Version: [`11.0.0`](version-info.md) _(October 21st, 2016)_
+- Version: [`12.0.0`](version-info.md) _(December 23rd, 2016)_
     + _Starting from `8.0.0`, the library uses [Semantic Versioning 2.0.0]_
 - License: [Apache License v2.0](LICENSE)
 - Project page: <https://bitbucket.org/haibison/android-lockpattern>
@@ -307,5 +307,5 @@ _For newer versions, please check file [`version-info.md`](version-info.md)._
 [Semantic Versioning 2.0.0]: http://semver.org/spec/v2.0.0.html
 [Wiki]: https://bitbucket.org/haibison/android-lockpattern/wiki/
 [FAQs]: https://bitbucket.org/haibison/android-lockpattern/wiki/FAQs
-[API documentation]: http://haibison.bitbucket.org/apidocs/android-lockpattern
+[API documentation]: https://haibison.bitbucket.io/apidocs/android-lockpattern
 [SharedPreferences]: https://developer.android.com/reference/android/content/SharedPreferences.html

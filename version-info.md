@@ -1,4 +1,4 @@
-# `11.0.0` _(October 21st, 2016)_
+# `12.0.0` _(December 23rd, 2016)_
 
 - Support: Android 7+ ([Eclair MR1][Android-Eclair-MR1])
 
@@ -6,21 +6,12 @@
 
 ## Changes
 
-### Major
-
-- Renamed `haibison.android.lockpattern.utils.ResourceUtils` to `haibison.android.lockpattern.utils.ResUtils`.
-- Removed Gradle Wrapper.
-
-### Minor
-
-- Set [Underdogs][#haibison.android:underdogs] version to `3.+`.
-- Reduced PNG files' size by nearly 50%. Special thanks to the authors of [`pngquant`][pngquant].
-- Updated documentation, optimized code.
-- Some other minor changes...
+- Updated Hai Bison Maven URL to `https://haibison.bitbucket.io/maven-repos`.
+- Updated dependency [Underdogs][#haibison.android:underdogs] to `4.+`.
 
 ## Dependencies
 
-- [`haibison.android:underdogs:3.+`][#haibison.android:underdogs]
+- [`haibison.android:underdogs:4.+`][#haibison.android:underdogs]
 
 ---
 
