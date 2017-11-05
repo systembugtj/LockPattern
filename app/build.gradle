@@ -48,7 +48,7 @@ dependencies {
 apply plugin: 'maven'
 
 uploadArchives { repositories { mavenDeployer {
-    repository(url: new File('../../haibison.bitbucket.org/master/maven-repos/').getAbsoluteFile().toURI().toString())
+    repository(url: new File(rootProject.projectDir.getParentFile(), 'maven-repos').getAbsoluteFile().toURI().toString())
 
     pom.groupId    = 'haibison.android'
     pom.artifactId = 'lockpattern'
