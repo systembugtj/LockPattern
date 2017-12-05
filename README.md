@@ -3,6 +3,7 @@
 - Version: [`12.0.0`](version-info.md) _(December 23rd, 2016)_
     + _Starting from `8.0.0`, the library uses [Semantic Versioning 2.0.0]_
 - License: [Apache License v2.0](LICENSE)
+- Maven artifacts are signed with: [`063F E7CB 4F32 4914 996E  388F BA2F 0C52 1F33 83EF`](https://haibison.bitbucket.io/haibison.asc)
 - Project page: <https://bitbucket.org/haibison/android-lockpattern>
 - Demo: <https://play.google.com/store/apps/details?id=group.pals.android.lib.ui.lockpattern.demo>
 - For developers: [Wiki], [API documentation].
