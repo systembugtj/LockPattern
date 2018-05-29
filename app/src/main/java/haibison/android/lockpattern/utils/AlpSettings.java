@@ -50,7 +50,7 @@ public class AlpSettings {
     @NonNull
     public static final String genPreferenceFilename() {
         return String.format("%s_%s", Alp.LIB_NAME, Alp.UID);
-    }//genPreferenceFilename()
+    }
 
     /**
      * Generates global database filename. the database filename.
@@ -60,7 +60,7 @@ public class AlpSettings {
     @NonNull
     public static final String genDatabaseFilename(@NonNull String name) {
         return String.format("%s_%s_%s", Alp.LIB_NAME, Alp.UID, name);
-    }//genDatabaseFilename()
+    }
 
     /**
      * Gets new {@link SharedPreferences}.
@@ -73,7 +73,7 @@ public class AlpSettings {
     public static SharedPreferences p(@NonNull Context context) {
         // Always use application context
         return context.getApplicationContext().getSharedPreferences(genPreferenceFilename(), Context.MODE_PRIVATE);
-    }//p()
+    }
 
     /**
      * Setup {@code pm} to use global unique filename and global access mode. You must use this method if you let the user change preferences
@@ -88,7 +88,7 @@ public class AlpSettings {
     public static void setupPreferenceManager(@NonNull Context context, @NonNull PreferenceManager pm) {
         pm.setSharedPreferencesMode(Context.MODE_PRIVATE);
         pm.setSharedPreferencesName(genPreferenceFilename());
-    }//setupPreferenceManager()
+    }
 
     /**
      * Display preferences.
@@ -139,7 +139,7 @@ public class AlpSettings {
                     context.getString(R.string.alp_42447968_pkey_display_stealth_mode),
                     context.getResources().getBoolean(R.bool.alp_42447968_pkey_display_stealth_mode_default)
             );
-        }//isStealthMode()
+        }
 
         /**
          * Sets stealth mode.
@@ -151,7 +151,7 @@ public class AlpSettings {
          */
         public static void setStealthMode(@NonNull Context context, boolean v) {
             p(context).edit().putBoolean(context.getString(R.string.alp_42447968_pkey_display_stealth_mode), v).commit();
-        }//setStealthMode()
+        }
 
         /**
          * Gets minimum wired dots allowed for a pattern.
@@ -164,7 +164,7 @@ public class AlpSettings {
                     context.getString(R.string.alp_42447968_pkey_display_min_wired_dots),
                     context.getResources().getInteger(R.integer.alp_42447968_pkey_display_min_wired_dots_default)
             );
-        }//getMinWiredDots()
+        }
 
         /**
          * Validates min wired dots.
@@ -176,7 +176,7 @@ public class AlpSettings {
         public static int validateMinWiredDots(@NonNull Context context, int v) {
             if (v <= 0 || v > 9) v = context.getResources().getInteger(R.integer.alp_42447968_pkey_display_min_wired_dots_default);
             return v;
-        }//validateMinWiredDots()
+        }
 
         /**
          * Sets minimum wired dots allowed for a pattern.
@@ -189,7 +189,7 @@ public class AlpSettings {
         public static void setMinWiredDots(@NonNull Context context, int v) {
             v = validateMinWiredDots(context, v);
             p(context).edit().putInt(context.getString(R.string.alp_42447968_pkey_display_min_wired_dots), v).commit();
-        }//setMinWiredDots()
+        }
 
         /**
          * Gets max retries allowed in mode comparing pattern.
@@ -202,7 +202,7 @@ public class AlpSettings {
                     context.getString(R.string.alp_42447968_pkey_display_max_retries),
                     context.getResources().getInteger(R.integer.alp_42447968_pkey_display_max_retries_default)
             );
-        }//getMaxRetries()
+        }
 
         /**
          * Validates max retries.
@@ -214,7 +214,7 @@ public class AlpSettings {
         public static int validateMaxRetries(@NonNull Context context, int v) {
             if (v <= 0) v = context.getResources().getInteger(R.integer.alp_42447968_pkey_display_max_retries_default);
             return v;
-        }//validateMaxRetries()
+        }
 
         /**
          * Sets max retries allowed in mode comparing pattern.
@@ -227,7 +227,7 @@ public class AlpSettings {
         public static void setMaxRetries(@NonNull Context context, int v) {
             v = validateMaxRetries(context, v);
             p(context).edit().putInt(context.getString(R.string.alp_42447968_pkey_display_max_retries), v).commit();
-        }//setMaxRetries()
+        }
 
         /**
          * Gets wired dots for a "CAPTCHA" pattern.
@@ -240,7 +240,7 @@ public class AlpSettings {
                     context.getString(R.string.alp_42447968_pkey_display_captcha_wired_dots),
                     context.getResources().getInteger(R.integer.alp_42447968_pkey_display_captcha_wired_dots_default)
             );
-        }//getCaptchaWiredDots()
+        }
 
         /**
          * Validates CAPTCHA wired dots.
@@ -252,7 +252,7 @@ public class AlpSettings {
         public static int validateCaptchaWiredDots(@NonNull Context context, int v) {
             if (v <= 0 || v > 9) v = context.getResources().getInteger(R.integer.alp_42447968_pkey_display_captcha_wired_dots_default);
             return v;
-        }//validateCaptchaWiredDots()
+        }
 
         /**
          * Sets wired dots for a "CAPTCHA" pattern.
@@ -265,9 +265,9 @@ public class AlpSettings {
         public static void setCaptchaWiredDots(@NonNull Context context, int v) {
             v = validateCaptchaWiredDots(context, v);
             p(context).edit().putInt(context.getString(R.string.alp_42447968_pkey_display_captcha_wired_dots), v).commit();
-        }//setCaptchaWiredDots()
+        }
 
-    }//Display
+    }
 
     /**
      * Security preferences.
@@ -305,7 +305,7 @@ public class AlpSettings {
                     context.getString(R.string.alp_42447968_pkey_sys_auto_save_pattern),
                     context.getResources().getBoolean(R.bool.alp_42447968_pkey_sys_auto_save_pattern_default)
             );
-        }//isAutoSavePattern()
+        }
 
         /**
          * Sets auto-save pattern mode.
@@ -318,7 +318,7 @@ public class AlpSettings {
         public static void setAutoSavePattern(@NonNull Context context, boolean v) {
             p(context).edit().putBoolean(context.getString(R.string.alp_42447968_pkey_sys_auto_save_pattern), v).commit();
             if (v == false) setPattern(context, null);
-        }//setAutoSavePattern()
+        }
 
         /**
          * Gets the pattern.
@@ -330,7 +330,7 @@ public class AlpSettings {
         public static char[] getPattern(@NonNull Context context) {
             final String pattern = p(context).getString(context.getString(R.string.alp_42447968_pkey_sys_pattern), null);
             return pattern == null ? null : pattern.toCharArray();
-        }//getPattern()
+        }
 
         /**
          * Sets the pattern.
@@ -342,7 +342,7 @@ public class AlpSettings {
             p(context).edit()
                     .putString(context.getString(R.string.alp_42447968_pkey_sys_pattern), pattern != null ? new String(pattern) : null)
                     .commit();
-        }//setPattern()
+        }
 
         /**
          * Gets encrypter class.
@@ -354,7 +354,7 @@ public class AlpSettings {
         public static char[] getEncrypterClass(@NonNull Context context) {
             final String clazz = p(context).getString(context.getString(R.string.alp_42447968_pkey_sys_encrypter_class), null);
             return clazz == null ? null : clazz.toCharArray();
-        }//getEncrypterClass()
+        }
 
         /**
          * Sets encrypter class.
@@ -366,7 +366,7 @@ public class AlpSettings {
          */
         public static void setEncrypterClass(@NonNull Context context, @Nullable Class<? extends Encrypter> clazz) {
             setEncrypterClass(context, clazz != null ? clazz.getName().toCharArray() : null);
-        }//setEncrypterClass()
+        }
 
         /**
          * Sets encrypter class.
@@ -380,8 +380,8 @@ public class AlpSettings {
             p(context).edit()
                     .putString(context.getString(R.string.alp_42447968_pkey_sys_encrypter_class), clazz != null ? new String(clazz) : null)
                     .commit();
-        }//setEncrypterClass()
+        }
 
-    }//Security
+    }
 
 }

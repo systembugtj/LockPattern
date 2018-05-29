@@ -94,7 +94,7 @@ public class UI {
             this.fixedHeightMinor = fixedHeightMinor;
             this.fixedWidthMajor = fixedWidthMajor;
             this.fixedWidthMinor = fixedWidthMinor;
-        }//ScreenSize()
+        }
 
         /**
          * Gets current screen size.
@@ -112,9 +112,9 @@ public class UI {
             }
 
             return UNDEFINED;
-        }//getCurrent()
+        }
 
-    }//ScreenSize
+    }
 
     /**
      * Uses a fixed size for {@code dialog} in large screens.
@@ -123,7 +123,7 @@ public class UI {
      */
     public static void adjustDialogSizeForLargeScreens(@NonNull Dialog dialog) {
         adjustDialogSizeForLargeScreens(dialog.getWindow());
-    }//adjustDialogSizeForLargeScreens()
+    }
 
     /**
      * Uses a fixed size for {@code dialogWindow} in large screens.
@@ -153,6 +153,6 @@ public class UI {
 
         if (DEBUG) Log.d(TAG, String.format("NEW >>> width = %,d | height = %,d", width, height));
         dialogWindow.setLayout(width, height);
-    }//adjustDialogSizeForLargeScreens()
+    }
 
 }

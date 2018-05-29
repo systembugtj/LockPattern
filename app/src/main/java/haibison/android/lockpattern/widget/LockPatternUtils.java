@@ -71,13 +71,13 @@ public class LockPatternUtils {
             for (int i = 0; i < bytes.length; i++) {
                 byte b = bytes[i];
                 result.add(LockPatternView.Cell.of(b / 3, b % 3));
-            }//for
+            }
         } catch (UnsupportedEncodingException e) {
             Log.e(TAG, e.getMessage(), e);
         }
 
         return result;
-    }//stringToPattern()
+    }
 
     /**
      * Serialize a pattern.
@@ -94,14 +94,14 @@ public class LockPatternUtils {
         for (int i = 0; i < patternSize; i++) {
             LockPatternView.Cell cell = pattern.get(i);
             res[i] = (byte) (cell.row * 3 + cell.column);
-        }//for
+        }
         try {
             return new String(res, UTF8);
         } catch (UnsupportedEncodingException e) {
             Log.e(TAG, e.getMessage(), e);
             return "";
         }
-    }//patternToString()
+    }
 
     /**
      * Serializes a pattern
@@ -125,7 +125,7 @@ public class LockPatternUtils {
             Log.e(TAG, e.getMessage(), e);
             return "";
         }
-    }//patternToSha1()
+    }
 
     /**
      * Generates a random "CAPTCHA" pattern. By saying "CAPTCHA", this method ensures that the generated pattern is easy for the user to re-draw.
@@ -187,11 +187,11 @@ public class LockPatternUtils {
                                 lastId = rowA * LockPatternView.MATRIX_WIDTH + c;
                                 if (usedIds.contains(lastId)) lastId = -1;
                                 else break;
-                            }//for
-                        }//if
+                            }
+                        }
 
                         break;
-                    }//AB
+                    }
 
                     case 1: {
                         if (colC < LockPatternView.MATRIX_WIDTH) {
@@ -200,11 +200,11 @@ public class LockPatternUtils {
                                 lastId = r * LockPatternView.MATRIX_WIDTH + colC;
                                 if (usedIds.contains(lastId)) lastId = -1;
                                 else break;
-                            }//for
-                        }//if
+                            }
+                        }
 
                         break;
-                    }//BC
+                    }
 
                     case 2: {
                         if (rowC < LockPatternView.MATRIX_WIDTH) {
@@ -213,11 +213,11 @@ public class LockPatternUtils {
                                 lastId = rowC * LockPatternView.MATRIX_WIDTH + c;
                                 if (usedIds.contains(lastId)) lastId = -1;
                                 else break;
-                            }//for
-                        }//if
+                            }
+                        }
 
                         break;
-                    }//DC
+                    }
 
                     case 3: {
                         if (colA >= 0) {
@@ -226,26 +226,26 @@ public class LockPatternUtils {
                                 lastId = r * LockPatternView.MATRIX_WIDTH + colA;
                                 if (usedIds.contains(lastId)) lastId = -1;
                                 else break;
-                            }//for
-                        }//if
+                            }
+                        }
 
                         break;
-                    }//AD
+                    }
                     }
 
                     if (lastId >= 0) break;
-                }//for line
+                }
 
                 if (lastId >= 0) break;
-            }//for distance
+            }
 
             usedIds.add(lastId);
-        }//while
+        }
 
         final ArrayList<LockPatternView.Cell> result = Lists.newArrayList();
         for (final int id : usedIds) result.add(LockPatternView.Cell.of(id));
 
         return result;
-    }//genCaptchaPattern()
+    }
 
 }

@@ -63,7 +63,7 @@ public class SimpleWeakEncryption {
      * This is singleton class.
      */
     private SimpleWeakEncryption() {
-    }// SimpleWeakEncryption()
+    }
 
     /**
      * Encrypts {@code data} by {@code key}.
@@ -114,7 +114,7 @@ public class SimpleWeakEncryption {
         } catch (BadPaddingException e) {
             throw new RuntimeException(e);
         }
-    }// encrypt()
+    }
 
     /**
      * Decrypts an encrypted string ({@code data}) by {@code key}.
@@ -156,7 +156,7 @@ public class SimpleWeakEncryption {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-    }// decrypt()
+    }
 
     /**
      * Generates secret key.
@@ -190,7 +190,7 @@ public class SimpleWeakEncryption {
         }
 
         return new SecretKeySpec(sha256(tmp.getEncoded()), SECRET_KEY_SPEC_ALGORITHM);
-    }// genKey()
+    }
 
     /**
      * Calculates SHA-256 of a string.
@@ -206,7 +206,7 @@ public class SimpleWeakEncryption {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-    }// sha256()
+    }
 
     /**
      * Calculates SHA-256 of a byte array.
@@ -225,7 +225,7 @@ public class SimpleWeakEncryption {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-    }// sha256()
+    }
 
     /**
      * Base-36 utilities.
@@ -238,7 +238,7 @@ public class SimpleWeakEncryption {
          * This is singleton class.
          */
         private Base36() {
-        }// Base36()
+        }
 
         /**
          * Converts a byte array to base-36.
@@ -249,7 +249,7 @@ public class SimpleWeakEncryption {
         @NonNull
         public static String toBase36(@NonNull byte[] bytes) {
             return new BigInteger(bytes).toString(Character.MAX_RADIX);
-        }// toBase36()
+        }
 
         /**
          * Converts a base-36 string to its byte array.
@@ -260,8 +260,8 @@ public class SimpleWeakEncryption {
         @NonNull
         public static byte[] toBytes(@NonNull String base36) {
             return new BigInteger(base36, Character.MAX_RADIX).toByteArray();
-        }// toBytes()
+        }
 
-    }// Base36
+    }
 
 }

@@ -43,7 +43,7 @@ public class ResUtils {
      */
     public static int resolveResourceId(@NonNull Context context, @AttrRes int resAttr) {
         return resolveResourceId(context, resAttr, 0);
-    }//resolveResourceId()
+    }
 
     /**
      * Convenient method for {@link Context#getTheme()} and {@link Theme#resolveAttribute(int, TypedValue, boolean)}.
@@ -57,6 +57,6 @@ public class ResUtils {
         final TypedValue typedValue = new TypedValue();
         if (context.getTheme().resolveAttribute(resAttr, typedValue, true)) return typedValue.resourceId;
         return defaultValue;
-    }//resolveResourceId()
+    }
 
 }

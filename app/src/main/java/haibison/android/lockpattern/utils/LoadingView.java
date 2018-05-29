@@ -56,7 +56,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      */
     public LoadingView(@NonNull Context context, @NonNull View view) {
         this.view = view;
-    }//LoadingView()
+    }
 
     /**
      * If you override this method, you must call its super method at beginning of the method.
@@ -69,10 +69,10 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
             @Override
             public void run() {
                 if (finished == false) view.setVisibility(View.VISIBLE);
-            }//run()
+            }
 
         }, getDelayTime());
-    }//onPreExecute()
+    }
 
     /**
      * If you override this method, you must call its super method at beginning of the method.
@@ -81,7 +81,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
     @CallSuper
     protected void onPostExecute(Result result) {
         doFinish();
-    }//onPostExecute()
+    }
 
     /**
      * If you override this method, you must call its super method at beginning of the method.
@@ -91,12 +91,12 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
     protected void onCancelled() {
         doFinish();
         super.onCancelled();
-    }//onCancelled()
+    }
 
     private void doFinish() {
         finished = true;
         view.setVisibility(View.GONE);
-    }//doFinish()
+    }
 
     /**
      * Gets the delay time before showing the view.
@@ -105,7 +105,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      */
     public long getDelayTime() {
         return delayTime;
-    }//getDelayTime()
+    }
 
     /**
      * Sets the delay time before showing the view.
@@ -117,7 +117,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
     public LoadingView<Params, Progress, Result> setDelayTime(final int delayTime) {
         this.delayTime = delayTime >= 0 ? delayTime : 0;
         return this;
-    }//setDelayTime()
+    }
 
     /**
      * Sets last exception. This method is useful in case an exception raises inside {@link #doInBackground(Object[])}.
@@ -126,7 +126,7 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
      */
     protected void setLastException(@Nullable Throwable t) {
         lastException = t;
-    }//setLastException()
+    }
 
     /**
      * Gets last exception.
@@ -136,6 +136,6 @@ public abstract class LoadingView<Params, Progress, Result> extends AsyncTask<Pa
     @Nullable
     public Throwable getLastException() {
         return lastException;
-    }//getLastException()
+    }
 
 }

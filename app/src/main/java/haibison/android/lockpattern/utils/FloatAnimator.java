@@ -66,7 +66,7 @@ public class FloatAnimator {
          */
         void onAnimationEnd(@NonNull FloatAnimator animator);
 
-    }// EventListener
+    }
 
     /**
      * Simple event listener.
@@ -77,21 +77,21 @@ public class FloatAnimator {
 
         @Override
         public void onAnimationStart(@NonNull FloatAnimator animator) {
-        }//onAnimationStart()
+        }
 
         @Override
         public void onAnimationUpdate(@NonNull FloatAnimator animator) {
-        }//onAnimationUpdate()
+        }
 
         @Override
         public void onAnimationCancel(@NonNull FloatAnimator animator) {
-        }//onAnimationCancel()
+        }
 
         @Override
         public void onAnimationEnd(@NonNull FloatAnimator animator) {
-        }//onAnimationEnd()
+        }
 
-    }// SimpleEventListener
+    }
 
     /**
      * Animation delay, in milliseconds.
@@ -119,7 +119,7 @@ public class FloatAnimator {
         this.duration = duration;
 
         animatedValue = startValue;
-    }// FloatAnimator()
+    }
 
     /**
      * Adds event listener.
@@ -131,7 +131,7 @@ public class FloatAnimator {
 
         if (eventListeners == null) eventListeners = Lists.newArrayList();
         eventListeners.add(listener);
-    }// addEventListener()
+    }
 
     /**
      * Gets animated value.
@@ -140,7 +140,7 @@ public class FloatAnimator {
      */
     public float getAnimatedValue() {
         return animatedValue;
-    }// getAnimatedValue()
+    }
 
     /**
      * Starts animating.
@@ -172,10 +172,10 @@ public class FloatAnimator {
                     notifyAnimationUpdate();
                     handler.postDelayed(this, ANIMATION_DELAY);
                 }
-            }// run()
+            }
 
         });
-    }// start()
+    }
 
     /**
      * Cancels animating.
@@ -188,7 +188,7 @@ public class FloatAnimator {
 
         notifyAnimationCancel();
         notifyAnimationEnd();
-    }// cancel()
+    }
 
     /**
      * Notifies all listeners that animation starts.
@@ -198,8 +198,8 @@ public class FloatAnimator {
         if (listeners != null) {
             for (EventListener listener : listeners)
                 listener.onAnimationStart(this);
-        }// if
-    }// notifyAnimationStart()
+        }
+    }
 
     /**
      * Notifies all listeners that animation updates.
@@ -209,8 +209,8 @@ public class FloatAnimator {
         if (listeners != null) {
             for (EventListener listener : listeners)
                 listener.onAnimationUpdate(this);
-        }// if
-    }// notifyAnimationUpdate()
+        }
+    }
 
     /**
      * Notifies all listeners that animation cancels.
@@ -220,8 +220,8 @@ public class FloatAnimator {
         if (listeners != null) {
             for (EventListener listener : listeners)
                 listener.onAnimationCancel(this);
-        }// if
-    }// notifyAnimationCancel()
+        }
+    }
 
     /**
      * Notifies all listeners that animation ends.
@@ -231,7 +231,7 @@ public class FloatAnimator {
         if (listeners != null) {
             for (EventListener listener : listeners)
                 listener.onAnimationEnd(this);
-        }// if
-    }// notifyAnimationEnd()
+        }
+    }
 
 }

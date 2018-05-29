@@ -31,7 +31,7 @@ public class Lists {
      * This is singleton class.
      */
     private Lists() {
-    }//Lists()
+    }
 
     /**
      * Creates an empty {@code ArrayList} instance.

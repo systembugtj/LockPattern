@@ -99,7 +99,7 @@ public class LockPatternView extends View {
          */
         public int getId() {
             return row * MATRIX_WIDTH + column;
-        }// getId()
+        }
 
         /**
          * @param row    The row of the cell.
@@ -120,7 +120,7 @@ public class LockPatternView extends View {
          */
         public static synchronized Cell of(int id) {
             return of(id / MATRIX_WIDTH, id % MATRIX_WIDTH);
-        }// of()
+        }
 
         private static void checkRange(int row, int column) {
             if (row < 0 || row > MATRIX_WIDTH - 1) {
@@ -136,7 +136,7 @@ public class LockPatternView extends View {
         @Override
         public String toString() {
             return "(ROW=" + row + ",COL=" + column + ")";
-        }// toString()
+        }
 
         @Override
         public boolean equals(Object object) {
@@ -144,7 +144,7 @@ public class LockPatternView extends View {
                 return column == ((Cell) object).column
                         && row == ((Cell) object).row;
             return super.equals(object);
-        }// equals()
+        }
 
         /*
          * PARCELABLE
@@ -153,31 +153,31 @@ public class LockPatternView extends View {
         @Override
         public int describeContents() {
             return 0;
-        }// describeContents()
+        }
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(column);
             dest.writeInt(row);
-        }// writeToParcel()
+        }
 
         public static final Parcelable.Creator<Cell> CREATOR = new Parcelable.Creator<Cell>() {
 
             public Cell createFromParcel(Parcel in) {
                 return new Cell(in);
-            }// createFromParcel()
+            }
 
             public Cell[] newArray(int size) {
                 return new Cell[size];
-            }// newArray()
-        };// CREATOR
+            }
+        };
 
         private Cell(Parcel in) {
             column = in.readInt();
             row = in.readInt();
-        }// Cell()
+        }
 
-    }// Cell
+    }
 
     /**
      * How to display the current pattern.
@@ -397,8 +397,8 @@ public class LockPatternView extends View {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && !isInEditMode()) {
             mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(context, android.R.interpolator.fast_out_slow_in);
             mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(context, android.R.interpolator.linear_out_slow_in);
-        }// if
-    }// LockPatternView()
+        }
+    }
 
     public CellState[][] getCellStates() {
         return mCellStates;
@@ -455,7 +455,7 @@ public class LockPatternView extends View {
     @SuppressWarnings("unchecked")
     public List<Cell> getPattern() {
         return (List<Cell>) mPattern.clone();
-    }// getPattern()
+    }
 
     /**
      * Set the pattern explicitely (rather than waiting for the user to input a pattern).
@@ -481,7 +481,7 @@ public class LockPatternView extends View {
      */
     public DisplayMode getDisplayMode() {
         return mPatternDisplayMode;
-    }// getDisplayMode()
+    }
 
     /**
      * Set the display mode of the current pattern. This can be useful, for instance, after detecting a pattern to tell
@@ -748,17 +748,17 @@ public class LockPatternView extends View {
                 public void onAnimationUpdate(FloatAnimator animator) {
                     state.size = (Float) animator.getAnimatedValue();
                     invalidate();
-                }// onAnimationUpdate()
+                }
 
                 @Override
                 public void onAnimationEnd(FloatAnimator animator) {
                     if (endRunnable != null)
                         endRunnable.run();
-                }// onAnimationEnd()
+                }
 
             });
             animator.start();
-        }// API < 11
+        }
         else {
             ValueAnimator valueAnimator = ValueAnimator.ofFloat(start, end);
             valueAnimator
@@ -785,8 +785,8 @@ public class LockPatternView extends View {
             valueAnimator.setInterpolator(interpolator);
             valueAnimator.setDuration(duration);
             valueAnimator.start();
-        }// API 11+
-    }// startSizeAnimation()
+        }
+    }
 
     // helper method to find which cell a point maps to
     private Cell checkForNewHit(float x, float y) {
