@@ -15,37 +15,32 @@
  */
 
 buildscript {
-    ext {
-        PLUGINS = [
-            android: 'com.android.tools.build:gradle:2.3.3',
-        ]//PLUGINS
-    }//ext
-
     repositories {
         jcenter()
-    }//repositories
+        google()
+    }
 
     dependencies {
-        classpath PLUGINS.android
-    }//dependencies
-}//buildscript
+        classpath 'com.android.tools.build:gradle:3.1.2'
+    }
+}
 
 allprojects {
     repositories {
         jcenter()
         maven { url 'https://haibison.bitbucket.io/maven-repos' }
-    }//repositories
-}//allprojects
+    }
+}
 
 ext {
     versions = [
-        buildTools: '26.0.2',
+        buildTools: '27.0.3',
         minSdk: 7,
-        compileSdk: 26,
-        targetSdk: 26,
+        compileSdk: 27,
+        targetSdk: 27,
     ]//versions
 
     dependencies = [
         underdogs: 'haibison.android:underdogs:4.+',
-    ]//dependencies
-}//ext
+    ]
+}

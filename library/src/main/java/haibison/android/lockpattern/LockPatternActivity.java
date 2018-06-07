@@ -350,7 +350,7 @@ public class LockPatternActivity extends Activity {
          * Makes new instance.
          *
          * @param context the context.
-         * @param clazz   class of {@link LockPatternActivity} or its subclass.
+         * @param cls   class of {@link LockPatternActivity} or its subclass.
          * @param action  action.
          */
         public IntentBuilder(@NonNull Context context, @NonNull Class<? extends LockPatternActivity> cls, @NonNull String action) {
